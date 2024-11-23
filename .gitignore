@@ -10,3 +10,4 @@ sopssecret*
 *sopssecret*
 mounts/
 kubeconfig
+ssh-public-key.txt
