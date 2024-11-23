@@ -9,12 +9,14 @@
     },
     "vs-kubernetes": {
         "vs-kubernetes.kubeconfig": "/workspaces/cluster/kubeconfig",
-        "vs-kubernetes.knownKubeconfigs": ["/workspaces/cluster/kubeconfig"]
+        "vs-kubernetes.knownKubeconfigs": [
+            "/workspaces/cluster/kubeconfig"
+        ]
     },
     "terminal.integrated.profiles.linux": {
         "bash": {
           "path": "/usr/bin/fish"
         }
       },
-    "terminal.integrated.defaultProfile.linux": "fish",
+    "terminal.integrated.defaultProfile.linux": "fish"
 }
