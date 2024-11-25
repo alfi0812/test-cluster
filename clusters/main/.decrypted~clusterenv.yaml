@@ -1,0 +1,36 @@
+## The Following are required by ClusterTool and CANNOT be removed
+# Ensure VIP is different from all master IPs
+VIP: 192.168.178.241
+## Defines the MasterNode IP
+# Please be aware, we only support x86_64 for the first node, ARM will NOT work by default
+MASTER1IP: 192.168.178.240
+# Defines the gateway for all nodes
+GATEWAY: 192.168.178.1
+# Defines the ip range metallb is allowed to use
+METALLB_RANGE: 192.168.178.242-192.168.178.254
+# IP Traefik will use for externally exposing ingress-resources (NOT its dashboard)
+TRAEFIK_IP: 192.168.178.242
+# IP Blocky DNS will be exposed on
+BLOCKY_IP: 192.168.178.254
+# Sets the Kubernetes Dashboard IP. Has to be within METALLB_RANGE and not in use
+DASHBOARD_IP: 192.168.178.243
+## Configures Traefik, ClusterIssuer and Blocky for said domain, using these credentials
+# domain is the base/highest level of your domain, so without subdomain, example: truecharts.org, not somesite.truecharts.org
+# To disable, please see the comments in their respective helm-values.yaml files!
+# When disabled, please use placeholder values instead.
+DOMAIN_0: test-cluster.de
+DOMAIN_0_EMAIL: admin@goeppel.dev
+DOMAIN_0_CLOUDFLARE_TOKEN: M37Re7dszwCZePAwb4UcY5idrPiyHBGE92WleIRt
+# Used to automatically generate a sshkey-pair for FluxCD
+# Has to start with ssh://
+# Please make sure to NOT contain any special characters in the URL except "-"
+GITHUB_REPOSITORY: ssh://git@github.com:alfi0812/test-cluster.git
+## Uncomment and adapt to automatically setup your dockerhub credentials
+## This should prevent much of the potential ratelimits
+# DOCKERHUB_USER: dockerhub-username
+# DOCKERHUB_PASSWORD: dockerhub-password
+## DO NOT ALTER
+PODNET: 172.16.0.0/16
+SVCNET: 172.17.0.0/16
+# Userprovided:
+TUNNEL_TOKEN: eyJhIjoiMTQ5Nzk1Mzc1MWIyMzljYjdlN2Y4OTZiZTkwZTExZWMiLCJ0IjoiZDE5MzJhMTktODczNi00NjhhLThkNWMtNjg1N2I2MDY5MmJiIiwicyI6IlpHWTVORGM1TUdZdE5ERmxZUzAwWWpneExXSmxNRGt0TXpWaFlXWXpOR1l6T1RndyJ9
