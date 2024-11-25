@@ -30,8 +30,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    ## set stopAll to "true" if you do not want to use traefik
-    # and/or disable its service
     global:
       stopAll: false
     defaultCertificate: "domain-0-wildcard"
