@@ -8,11 +8,11 @@ spec:
     chart:
         spec:
 
-            chart: prometheus-operator
-            version: 8.11.1
+            chart: kube-prometheus-stack
+            version: 66.2.2
             sourceRef:
                 kind: HelmRepository
-                name: truecharts
+                name: prometheus-community
                 namespace: flux-system
             interval: 5m
     install:
@@ -24,4 +24,52 @@ spec:
         crds: CreateReplace
         remediation:
             retries: 3
-    values: {}
+    values:
+      crds:
+        enabled: true
+      prometheusOperator:
+        enabled: true
+      ## Everything down here, explicitly disables everything BUT the operator itself
+      global:
+        rbac:
+          create: true
+      defaultRules:
+        create: false
+      windowsMonitoring:
+        enabled: false
+      prometheus-windows-exporter:
+        prometheus:
+          monitor:
+            enabled: false
+      alertmanager:
+        enabled: false
+      grafana:
+        enabled: false
+        forceDeployDashboards: false
+        defaultDashboardsEnabled: false
+      kubernetesServiceMonitors:
+        enabled: false
+      kubeApiServer:
+        enabled: false
+      kubelet:
+        enabled: false
+      kubeControllerManager:
+        enabled: false
+      coreDns:
+        enabled: false
+      kubeDns:
+        enabled: false
+      kubeEtcd:
+        enabled: false
+      kubeScheduler:
+        enabled: false
+      kubeProxy:
+        enabled: false
+      kubeStateMetrics:
+        enabled: false
+      nodeExporter:
+        enabled: false
+      prometheus:
+        enabled: false
+      thanosRuler:
+        enabled: false
