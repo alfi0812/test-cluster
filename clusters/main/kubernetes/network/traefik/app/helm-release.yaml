@@ -86,6 +86,7 @@ spec:
               # -- Trust every incoming connection
               insecureMode: false
     middlewares:
+      redirectRegex:
         - name: traefik-regex
           permanent: false
           regex: ${REGEX}
