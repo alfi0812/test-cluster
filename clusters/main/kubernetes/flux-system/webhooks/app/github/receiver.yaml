@@ -18,9 +18,9 @@ spec:
       namespace: flux-system
     - apiVersion: kustomize.toolkit.fluxcd.io/v1
       kind: Kustomization
-      name: cluster
+      name: flux-entry-repos
       namespace: flux-system
     - apiVersion: kustomize.toolkit.fluxcd.io/v1
       kind: Kustomization
-      name: cluster-apps
+      name: flux-entry
       namespace: flux-system
