@@ -17,4 +17,3 @@ resources:
   - generic-device-plugin/ks.yaml
   - nvidia-device-plugin/ks.yaml
   - kyverno-policies/ks.yaml
-  - kubernetes-dashboard/ks.yaml
