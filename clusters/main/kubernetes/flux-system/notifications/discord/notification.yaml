@@ -56,6 +56,9 @@ spec:
       namespace: kyverno
     - kind: HelmRelease
       name: "*"
+      namespace: librespeed
+    - kind: HelmRelease
+      name: "*"
       namespace: longhorn-system
     - kind: HelmRelease
       name: "*"
