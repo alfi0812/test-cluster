@@ -2,6 +2,8 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: flux-system
-  labels:
-    kustomize.toolkit.fluxcd.io/prune: disabled
+    name: flux-system
+    labels:
+        pod-security.kubernetes.io/enforce: privileged
+        topolvm.io/webhook: ignore
+        kustomize.toolkit.fluxcd.io/prune: disabled
