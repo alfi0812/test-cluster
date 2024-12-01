@@ -32,13 +32,6 @@ spec:
   values:
     global:
       stopAll: false
-    service:
-      main:
-        loadBalancerIP: ${MINIO_IP}
-        type: LoadBalancer
-      api:
-        loadBalancerIP: ${MINIO_IP}
-        type: LoadBalancer
     persistence:
       config:
         enabled: true
