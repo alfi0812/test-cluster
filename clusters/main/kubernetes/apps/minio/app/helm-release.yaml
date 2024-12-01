@@ -32,13 +32,6 @@ spec:
   values:
     global:
       stopAll: false
-    service:
-      main:
-        loadBalancerIP: ${MINIO_IP}
-        type: LoadBalancer
-      api:
-        loadBalancerIP: ${MINIO_IP}
-        type: LoadBalancer
     persistence:
       config:
         enabled: true
@@ -53,3 +46,34 @@ spec:
               env:
                 MINIO_ROOT_USER: ${MINIO_USER}
                 MINIO_ROOT_PASSWORD: ${MINIO_PASSWORD}
+                MINIO_BROWSER_REDIRECT_URL: "https://console.minio.${DOMAIN_0}"
+                MINIO_SERVER_URL: "https://minio.${DOMAIN_0}"
+    ingress:
+      main:
+        enabled: true
+        integrations:
+          traefik:
+            enabled: true
+            entrypoints:
+            - websecure
+          certManager:
+            enabled: true
+            certificateIssuer: domain-0-le-prod
+        hosts:
+          - host: minio.${DOMAIN_0}
+            paths:
+              - path: /
+                pathType: Prefix
+      api:
+        enabled: true
+        integrations:
+          traefik:
+            enabled: true
+            entrypoints:
+            - websecure
+          certManager:
+            enabled: true
+            certificateIssuer: domain-0-le-prod
+        hosts:
+          - host: console.minio.${DOMAIN_0}
+            paths:
