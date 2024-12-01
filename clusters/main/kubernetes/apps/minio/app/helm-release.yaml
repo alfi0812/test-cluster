@@ -60,7 +60,7 @@ spec:
             enabled: true
             certificateIssuer: domain-0-le-prod
         hosts:
-          - host: minio.${DOMAIN_0}
+          - host: console.minio.${DOMAIN_0}
             paths:
               - path: /
                 pathType: Prefix
@@ -75,5 +75,5 @@ spec:
             enabled: true
             certificateIssuer: domain-0-le-prod
         hosts:
-          - host: console.minio.${DOMAIN_0}
+          - host: minio.${DOMAIN_0}
             paths:
