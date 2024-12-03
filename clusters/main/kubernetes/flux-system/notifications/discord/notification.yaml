@@ -1,0 +1,112 @@
+---
+# yaml-language-server: $schema=https://github.com/fluxcd-community/flux2-schemas/raw/main/provider-notification-v1beta3.json
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Provider
+metadata:
+  name: discord
+  namespace: flux-system
+spec:
+  type: discord
+  secretRef:
+    name: discord-webhook
+---
+# yaml-language-server: $schema=https://github.com/fluxcd-community/flux2-schemas/raw/main/alert-notification-v1beta3.json
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Alert
+metadata:
+  name: discord
+  namespace: flux-system
+spec:
+  providerRef:
+    name: discord
+  eventSeverity: info
+  eventSources:
+    - kind: HelmRelease
+      name: "*"
+      namespace: cert-manager
+    - kind: HelmRelease
+      name: "*"
+      namespace: cloudflared
+    - kind: HelmRelease
+      name: "*"
+      namespace: cloudnative-pg
+    - kind: HelmRelease
+      name: "*"
+      namespace: clusterissuer
+    - kind: HelmRelease
+      name: "*"
+      namespace: default
+    - kind: HelmRelease
+      name: "*"
+      namespace: flux-system
+    - kind: HelmRelease
+      name: "*"
+      namespace: generic-device-plugin
+    - kind: HelmRelease
+      name: "*"
+      namespace: kube-node-lease
+    - kind: HelmRelease
+      name: "*"
+      namespace: kube-public
+    - kind: HelmRelease
+      name: "*"
+      namespace: kube-system
+    - kind: HelmRelease
+      name: "*"
+      namespace: kyverno
+    - kind: HelmRelease
+      name: "*"
+      namespace: librespeed
+    - kind: HelmRelease
+      name: "*"
+      namespace: longhorn-system
+    - kind: HelmRelease
+      name: "*"
+      namespace: metallb
+    - kind: HelmRelease
+      name: "*"
+      namespace: metallb-config
+    - kind: HelmRelease
+      name: "*"
+      namespace: nvidia-device-plugin
+    - kind: HelmRelease
+      name: "*"
+      namespace: openebs
+    - kind: HelmRelease
+      name: "*"
+      namespace: prometheus-operator
+    - kind: HelmRelease
+      name: "*"
+      namespace: snapshot-controller
+    - kind: HelmRelease
+      name: "*"
+      namespace: spegel
+    - kind: HelmRelease
+      name: "*"
+      namespace: system
+    - kind: HelmRelease
+      name: "*"
+      namespace: system-upgrade
+    - kind: HelmRelease
+      name: "*"
+      namespace: traefik
+    - kind: HelmRelease
+      name: "*"
+      namespace: volsync
+    - kind: HelmRelease
+      name: "*"
+      namespace: minio
+---
+# yaml-language-server: $schema=https://github.com/fluxcd-community/flux2-schemas/raw/main/alert-notification-v1beta3.json
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Alert
+metadata:
+  name: discord-kustomization
+  namespace: flux-system
+spec:
+  providerRef:
+    name: discord
+  eventSeverity: error
+  eventSources:
+    - kind: Kustomization
+      name: "*"

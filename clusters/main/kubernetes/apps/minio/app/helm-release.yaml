@@ -1,0 +1,79 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: minio
+  namespace: minio
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: minio
+      version: 13.7.4
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  driftDetection:
+    mode: warn
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    global:
+      stopAll: false
+    persistence:
+      config:
+        enabled: true
+        type: nfs
+        path: ${MINIO_NFS_PATH}
+        server: ${BACKUP_TRUENAS_IP}
+    workload:
+      main:
+        podSpec:
+          containers:
+            main:
+              env:
+                MINIO_ROOT_USER: ${MINIO_USER}
+                MINIO_ROOT_PASSWORD: ${MINIO_PASSWORD}
+                MINIO_BROWSER_REDIRECT_URL: "https://minio.${DOMAIN_0}"
+                MINIO_SERVER_URL: "https://api.${DOMAIN_0}"
+    ingress:
+      main:
+        enabled: true
+        integrations:
+          traefik:
+            enabled: true
+            entrypoints:
+            - websecure
+          certManager:
+            enabled: true
+            certificateIssuer: domain-0-le-prod
+        hosts:
+          - host: minio.${DOMAIN_0}
+            paths:
+              - path: /
+                pathType: Prefix
+      api:
+        enabled: true
+        integrations:
+          traefik:
+            enabled: true
+            entrypoints:
+            - websecure
+          certManager:
+            enabled: true
+            certificateIssuer: domain-0-le-prod
+        hosts:
+          - host: api.${DOMAIN_0}
+            paths:
