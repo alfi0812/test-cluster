@@ -45,10 +45,13 @@ spec:
                 env:
                   GLANCES_OPT: "-w"
                 fixedEnv:
-                  PUID: ""
-                  USER_ID: ""
-                  UID: ""
-
+                  PUID: 0
+                  GID: 568
       resources:
         limits:
           nvidia.com/gpu: 1
+      securityContext:
+          PUID: 0
+          runAsGroup: 0
+          runAsNonRoot: false
+          runAsUser: 0
