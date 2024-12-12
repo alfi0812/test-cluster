@@ -30,7 +30,7 @@ spec:
       image:
         repository: nicolargo/glances
         pullPolicy: IfNotPresent
-        tag: ubuntu-4.2.1-full
+        tag: 4.2.1-full
       service:
         main:
           ports:
@@ -48,3 +48,8 @@ spec:
       resources:
         limits:
           nvidia.com/gpu: 1
+      securityContext:
+        containers:
+          runAsUser: 0
+          runAsGroup: 0
+          runAsNonRoot: false
