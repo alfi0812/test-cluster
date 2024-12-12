@@ -39,10 +39,13 @@ spec:
       workload:
         main:
           podSpec:
+            runtimeClassName: "nvidia"
             containers:
               main:
                 env:
                   GLANCES_OPT: "-w"
                   # GPU Support
-                  NVIDIA_VISIBLE_DEVICES: all
                   NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
+      resources:
+        limits:
+          nvidia.com/gpu: 1
