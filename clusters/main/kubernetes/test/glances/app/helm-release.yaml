@@ -49,7 +49,7 @@ spec:
         limits:
           nvidia.com/gpu: 1
       securityContext:
-        containers:
-          runAsUser: 0
+          # PUID: 0
           runAsGroup: 0
           runAsNonRoot: false
+          runAsUser: 0
