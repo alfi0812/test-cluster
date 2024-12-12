@@ -43,10 +43,10 @@ spec:
             containers:
               main:
                 env:
-                  GLANCES_OPT: "-w"
+                  GLANCES_OPT: "-w -d -C /glances/conf/glances.conf"
                 fixedEnv:
                   PUID: 0
-                  GID: 568
+                  GID: "568"
       resources:
         limits:
           nvidia.com/gpu: 1
