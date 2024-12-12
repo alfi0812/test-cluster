@@ -30,7 +30,7 @@ spec:
       image:
         repository: nicolargo/glances
         pullPolicy: IfNotPresent
-        tag: 4.2.1-full
+        tag: ubuntu-4.2.1-full
       service:
         main:
           ports:
