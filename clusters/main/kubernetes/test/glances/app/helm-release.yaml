@@ -50,6 +50,7 @@ spec:
           nvidia.com/gpu: 1
       securityContext:
           # PUID: 0
+          PUID: 0
           runAsGroup: 0
           runAsNonRoot: false
           runAsUser: 0
