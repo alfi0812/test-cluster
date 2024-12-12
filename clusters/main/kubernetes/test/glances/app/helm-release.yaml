@@ -46,6 +46,9 @@ spec:
                   GLANCES_OPT: "-w"
                 fixedEnv:
                   PUID: ""
+                  USER_ID: ""
+                  UID: ""
+
       resources:
         limits:
           nvidia.com/gpu: 1
