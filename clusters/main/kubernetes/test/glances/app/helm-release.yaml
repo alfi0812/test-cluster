@@ -44,12 +44,12 @@ spec:
               main:
                 env:
                   GLANCES_OPT: "-w"
-                  # GPU Support
+                fixedEnv:
+                  PUID: ""
       resources:
         limits:
           nvidia.com/gpu: 1
       securityContext:
-          # PUID: 0
           PUID: 0
           runAsGroup: 0
           runAsNonRoot: false
