@@ -1,0 +1,48 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: librespeed
+    namespace: librespeed
+spec:
+    interval: 5m
+    chart:
+        spec:
+            # renovate: registryUrl=https://charts.truechartsoci.org
+            chart: app-template
+            version: 14.2.2
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+            interval: 5m
+    install:
+        createNamespace: true
+        crds: CreateReplace
+        remediation:
+            retries: 3
+    upgrade:
+        crds: CreateReplace
+        remediation:
+            retries: 3
+    values:
+      global:
+        stopAll: false
+      image:
+        repository: nicolargo/glances
+        pullPolicy: IfNotPresent
+        tag: 4.2.1-full@sha256:c7a3715cc3891a70e7fbbb2ae4be7f61e9a19e7c20fdb8d799ac7323d61d8954
+      service:
+        main:
+          ports:
+            main:
+              port: 61208
+      workload:
+        main:
+          podSpec:
+            containers:
+              main:
+                env:
+                  GLANCES_OPT: "-w"
+                  # GPU Support
+                  NVIDIA_VISIBLE_DEVICES: all
+                  NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
