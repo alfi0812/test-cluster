@@ -45,7 +45,6 @@ spec:
                 env:
                   GLANCES_OPT: "-w"
                   # GPU Support
-                  NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
       resources:
         limits:
           nvidia.com/gpu: 1
