@@ -5,13 +5,13 @@ name: "Tests"
 on:
   pull_request:
     branches: ["main"]
-    paths: ["kubernetes/**"]
+    paths: ["clusters/main/kubernetes/**"]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
   cancel-in-progress: true
 env:
-  KUBERNETES_DIR: ./kubernetes
+  KUBERNETES_DIR: ./clusters/main/kubernetes
 
 jobs:
   kubeconform:
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Setup Homebrew
         uses: Homebrew/actions/setup-homebrew@master
@@ -39,32 +39,32 @@ jobs:
       pull-requests: write
     strategy:
       matrix:
-        paths: ["kubernetes"]
-        resources: ["kustomization"] 
+        paths: ["clusters/main/kubernetes"]
+        resources: ["kustomization"]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           path: pull
 
       - name: Checkout Default Branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           ref: "${{ github.event.repository.default_branch }}"
           path: default
 
       - name: Diff Resources
-        uses: docker://ghcr.io/allenporter/flux-local:main
+        uses: docker://ghcr.io/allenporter/flux-local:main@sha256:b13c306572234348bde8573212f37adc30f8add3ca102ba5d4d4d8d7d95fd6ec
         with:
           args: >-
             diff ${{ matrix.resources }}
             --unified 6
-            --path /github/workspace/pull/${{ matrix.paths }}/flux
-            --path-orig /github/workspace/default/${{ matrix.paths }}/flux
+            --path /github/workspace/pull/${{ matrix.paths }}
+            --path-orig /github/workspace/default/${{ matrix.paths }}
             --strip-attrs "helm.sh/chart,checksum/config,app.kubernetes.io/version,chart"
             --limit-bytes 10000
             --all-namespaces
-            --sources "home-kubernetes"
+            --sources "cluster"
             --output-file diff.patch
 
       - name: Generate Diff
@@ -77,7 +77,7 @@ jobs:
 
       - if: ${{ steps.diff.outputs.diff != '' }}
         name: Add comment
-        uses: mshick/add-pr-comment@v2
+        uses: mshick/add-pr-comment@b8f338c590a895d50bcbfa6c5859251edc8952fc # v2
         with:
           message-id: "${{ github.event.pull_request.number }}/${{ matrix.paths }}/${{ matrix.resources }}"
           message-failure: Diff was not successful
