@@ -9,7 +9,7 @@ spec:
         spec:
             # renovate: registryUrl=https://charts.truechartsoci.org
             chart: app-template
-            version: 14.3.2
+            version: 14.4.0
             sourceRef:
                 kind: HelmRepository
                 name: truecharts
