@@ -74,7 +74,7 @@ spec:
               enabled: true
               certificateIssuer: domain-0-le-prod
           hosts:
-            - host: libre.${DOMAIN_0}
+            - host: link.${DOMAIN_0}
               paths:
                 - path: /
                   pathType: Prefix
