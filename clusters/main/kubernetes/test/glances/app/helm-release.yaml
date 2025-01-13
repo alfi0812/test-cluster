@@ -55,7 +55,7 @@ spec:
                   DISCORD: "https://discord.gg/djkexrj"
                   TIKTOK: "https://www.tiktok.com/@technotim"
                   KIT: "https://kit.co/technotim"
-                  FOOTER: "thanks for stopping by!"
+                  FOOTER: "This is a test"
       service:
         main:
           ports:
