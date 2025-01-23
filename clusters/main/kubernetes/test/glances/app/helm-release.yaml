@@ -28,53 +28,32 @@ spec:
       global:
         stopAll: false
       image:
-        repository: ghcr.io/techno-tim/littlelink-server
+        repository: nicolargo/glances
         pullPolicy: IfNotPresent
-        tag: latest@sha256:c66ac0f65d674eaf40ed577bfa749fde58c594f436d387697ceaf7789dbc7e52
-      workload:
-        main:
-          podSpec:
-            containers:
-              main:
-                env:
-                  META_TITLE: "techno tim"
-                  META_DESCRIPTION: "techno tim link page"
-                  META_AUTHOR: "techno tim"
-                  THEME: "Dark"
-                  FAVICON_URL: "https://pbs.twimg.com/profile_images/1286144221217316864/qiaskopb_200x200.jpg"
-                  AVATAR_URL: "https://pbs.twimg.com/profile_images/1286144221217316864/qiaskopb_200x200.jpg"
-                  AVATAR_2X_URL: "https://pbs.twimg.com/profile_images/1286144221217316864/qiaskopb_400x400.jpg"
-                  AVATAR_ALT: "techno tim profile pic"
-                  NAME: "technotim"
-                  BIO: "hey! just a place where you can connect with me!"
-                  GITHUB: "https://github.com/timothystewart6"
-                  TWITTER: "https://twitter.com/technotimlive"
-                  INSTAGRAM: "https://www.instagram.com/techno.tim"
-                  YOUTUBE: "https://www.youtube.com/channel/ucok-ghyjcwznj3br4oxwh0a"
-                  TWITCH: "https://www.twitch.tv/technotim/"
-                  DISCORD: "https://discord.gg/djkexrj"
-                  TIKTOK: "https://www.tiktok.com/@technotim"
-                  KIT: "https://kit.co/technotim"
-                  FOOTER: 'Alfi0812 © {{ now | date "2006" }} text'
+        tag: ubuntu-4.2.1-full
       service:
         main:
           ports:
             main:
-              port: 10040
-              targetPort: 3000
-      ingress:
+              port: 61208
+      workload:
         main:
-          enabled: true
-          integrations:
-            traefik:
-              enabled: true
-              entrypoints:
-              - websecure
-            certManager:
-              enabled: true
-              certificateIssuer: domain-0-le-prod
-          hosts:
-            - host: link.${DOMAIN_0}
-              paths:
-                - path: /
-                  pathType: Prefix
+          podSpec:
+            runtimeClassName: "nvidia"
+            containers:
+              main:
+                env:
+                  # GLANCES_OPT: "-w"
+                  GLANCES_OPT: "-w -d -C /glances/conf/glances.conf"
+              #  fixedEnv:
+               #   PUID: 0
+                #  GID: 568
+                  # GID: "568"
+      resources:
+        limits:
+          nvidia.com/gpu: 1
+      securityContext:
+          PUID: 0
+          runAsGroup: 0
+          runAsNonRoot: false
+          runAsUser: 0
