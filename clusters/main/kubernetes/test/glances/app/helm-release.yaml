@@ -56,3 +56,4 @@ spec:
           runAsNonRoot: false
           runAsUser: 0
           privleged: true
+          fsGroup: 0
