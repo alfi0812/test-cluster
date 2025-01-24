@@ -34,4 +34,7 @@ spec:
       stopAll: true
     service:
       main:
+        type: LoadBalancer
         loadBalancerIP: ${DASHBOARD_IP}
+    kong:
+      enabled: false
