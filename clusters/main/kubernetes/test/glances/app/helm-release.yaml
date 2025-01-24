@@ -25,35 +25,27 @@ spec:
         remediation:
             retries: 3
     values:
-      global:
-        stopAll: false
-      image:
-        repository: nicolargo/glances
-        pullPolicy: IfNotPresent
-        tag: ubuntu-4.3.0.8-full
-      service:
+      defaultPodOptions:
+        securityContext:
+          fsGroup: 65534
+      controllers:
         main:
-          ports:
+          annotations:
+            reloader.stakater.com/auto: "true"
+          containers:
             main:
-              port: 61208
-      workload:
-        main:
-          podSpec:
-            runtimeClassName: "nvidia"
-            containers:
-              main:
-                env:
-                  GLANCES_OPT: "-w -d -C /glances/conf/glances.conf"
-                fixedEnv:
-                  PUID: 0
-                  GID: 0
-      resources:
-        limits:
-          nvidia.com/gpu: 1
-      securityContext:
-          PUID: 0
-          runAsGroup: 0
-          runAsNonRoot: false
-          runAsUser: 0
-          privleged: true
-          fsGroup: 0
+              image:
+                repository: nicolargo/glances
+                tag: 3.4.0.3
+              env:
+                TZ: "${TIMEZONE}"
+                GLANCES_OPT: "-w -d -C /glances/conf/glances.conf"
+      persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: *app
+        globalMounts:
+          - subPath: glances.conf
+            path: /glances/conf/glances.conf
+            readOnly: true

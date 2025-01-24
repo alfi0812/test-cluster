@@ -3,3 +3,9 @@ kind: Kustomization
 resources:
     - helm-release.yaml
     - namespace.yaml
+configMapGenerator:
+  - name: glances
+    files:
+      - glances.conf
+generatorOptions:
+  disableNameSuffixHash: true
