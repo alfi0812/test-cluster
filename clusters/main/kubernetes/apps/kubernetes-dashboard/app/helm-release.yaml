@@ -31,8 +31,9 @@ spec:
     keepHistory: false
   values:
     global:
-      stopAll: true
+      stopAll: false
     service:
       main:
+        enabled: false
         type: LoadBalancer
         loadBalancerIP: ${DASHBOARD_IP}
