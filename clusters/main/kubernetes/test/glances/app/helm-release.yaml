@@ -41,7 +41,6 @@ spec:
       config:
         enabled: true
         type: configMap
-        name: *app
         globalMounts:
           - subPath: glances.conf
             path: /glances/conf/glances.conf
