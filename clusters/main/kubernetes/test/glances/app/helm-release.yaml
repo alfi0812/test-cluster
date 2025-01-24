@@ -45,4 +45,5 @@ spec:
           - subPath: glances.conf
             path: /glances/conf/glances.conf
             name: *app
+            namespace: glances
             readOnly: true
