@@ -37,3 +37,8 @@ spec:
                 tag: 4.3.0.8
               env:
                 GLANCES_OPT: "-w -d -C /glances/conf/glances.conf"
+      service:
+        main:
+          ports:
+            http:
+              port: 61208
