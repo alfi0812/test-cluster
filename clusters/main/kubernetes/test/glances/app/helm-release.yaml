@@ -37,11 +37,3 @@ spec:
                 tag: 4.3.0.8
               env:
                 GLANCES_OPT: "-w -d -C /glances/conf/glances.conf"
-      persistence:
-      config:
-        enabled: true
-        type: configMap
-        globalMounts:
-          - subPath: glances.conf
-            path: /glances/conf/glances.conf
-            readOnly: true
