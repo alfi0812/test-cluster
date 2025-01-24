@@ -43,7 +43,7 @@ spec:
             containers:
               main:
                 env:
-                  GLANCES_OPT: "-w"
+                  GLANCES_OPT: "-w -d -C /glances/conf/glances.conf"
                 fixedEnv:
                   PUID: 0
                   GID: 0
