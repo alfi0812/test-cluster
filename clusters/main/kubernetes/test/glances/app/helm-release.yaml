@@ -42,5 +42,5 @@ spec:
             main:
               port: 61208
       securityContext:
-        container:
+        pod:
           fsGroup: 65534
