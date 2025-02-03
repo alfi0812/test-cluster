@@ -41,7 +41,6 @@ spec:
               main:
                 env:
                   GLANCES_OPT: "-w"
-                  NVIDIA_VISIBLE_DEVICES: all
       service:
         main:
           ports:
@@ -55,7 +54,6 @@ spec:
       resources:
         limits:
           nvidia.com/gpu: 1
-          ingress:
       ingress:
         main:
           enabled: true
