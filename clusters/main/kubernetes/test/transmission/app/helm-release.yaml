@@ -67,8 +67,8 @@ spec:
                                 readiness:
                                     enabled: true
                                     type: tcp
-                        env:
-                            PEERPORT: "{{ .Values.service.torrent.ports.torrent.port }}"
+                            env:
+                                PEERPORT: "{{ .Values.service.torrent.ports.torrent.port }}"
         persistence:
             config:
                 enabled: true
