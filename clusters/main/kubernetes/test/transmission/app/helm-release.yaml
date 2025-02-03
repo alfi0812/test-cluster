@@ -73,9 +73,6 @@ spec:
             config:
                 enabled: true
                 mountPath: "/config"
-            watch:
-                enabled: true
-                mountPath: /watch
         portal:
             open:
                 enabled: true
