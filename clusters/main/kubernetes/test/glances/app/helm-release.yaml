@@ -47,6 +47,10 @@ spec:
       securityContext:
         container:
           PUID: 1000
+          readOnlyRootFilesystem: false
+          runAsGroup: 0
+          runAsNonRoot: false
+          runAsUser: 0
       resources:
         limits:
           nvidia.com/gpu: 1
