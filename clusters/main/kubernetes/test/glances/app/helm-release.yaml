@@ -38,6 +38,8 @@ spec:
                   GLANCES_OPT: "-w -d -C /glances/conf/glances.conf"
       service:
         main:
+          type: LoadBalancer
+          LoadBalancerIP: 192.168.178.254
           ports:
             main:
               port: 61208
