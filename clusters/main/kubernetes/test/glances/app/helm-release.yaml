@@ -49,6 +49,8 @@ spec:
       securityContext:
         container:
           PUID: 0
+          runAsGroup: 0
+          runAsUser: 0
       resources:
         limits:
           nvidia.com/gpu: 1
