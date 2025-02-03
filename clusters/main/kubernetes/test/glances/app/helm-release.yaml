@@ -28,7 +28,7 @@ spec:
       image:
         repository: nicolargo/glances
         pullPolicy: IfNotPresent
-        tag: ubuntu-4.3.0.8-full
+        tag: 4.3.0.8
       workload:
         main:
           podSpec:
@@ -40,7 +40,7 @@ spec:
             containers:
               main:
                 env:
-                  GLANCES_OPT: "-w"
+                  GLANCES_OPT: "-w -p {{ .Values.service.main.ports.main.port }}"
       service:
         main:
           ports:
