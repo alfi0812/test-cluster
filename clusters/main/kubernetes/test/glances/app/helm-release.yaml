@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: &app glances
+    name: glances
     namespace: glances
 spec:
     interval: 5m
@@ -42,9 +42,8 @@ spec:
             main:
               port: 61208
       securityContext:
-        pod:
-          fsGroup: 65534
         container:
+          PUID: 0
           readOnlyRootFilesystem: false
           runAsGroup: 0
           runAsNonRoot: false
