@@ -32,13 +32,13 @@ spec:
       workload:
         main:
           podSpec:
+            hostNetwork: true
             runtimeClassName: "nvidia"
             containers:
               main:
                 env:
                   GLANCES_OPT: "-w"
                   NVIDIA_VISIBLE_DEVICES: all
-      hostNetwork: true
       service:
         main:
           type: LoadBalancer
@@ -49,9 +49,7 @@ spec:
       securityContext:
         container:
           PUID: 1000
-          readOnlyRootFilesystem: false
           runAsGroup: 1000
-          runAsNonRoot: true
           runAsUser: 1000
       resources:
         limits:
