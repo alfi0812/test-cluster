@@ -28,7 +28,7 @@ spec:
       image:
         repository: nicolargo/glances
         pullPolicy: IfNotPresent
-        tag: ubuntu-4.3.0.8
+        tag: ubuntu-4.3.0.8-full
       workload:
         main:
           podSpec:
