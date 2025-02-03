@@ -36,6 +36,7 @@ spec:
               main:
                 env:
                   GLANCES_OPT: "-w"
+                  NVIDIA_VISIBLE_DEVICES: all
       hostNetwork: true
       service:
         main:
@@ -49,7 +50,7 @@ spec:
           PUID: 1000
           readOnlyRootFilesystem: false
           runAsGroup: 1000
-          runAsNonRoot: false
+          runAsNonRoot: true
           runAsUser: 1000
       resources:
         limits:
