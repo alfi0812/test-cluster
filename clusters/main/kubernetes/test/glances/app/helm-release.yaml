@@ -32,7 +32,6 @@ spec:
       workload:
         main:
           podSpec:
-            hostNetwork: true
             runtimeClassName: "nvidia"
             containers:
               main:
