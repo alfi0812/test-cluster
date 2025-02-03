@@ -48,9 +48,9 @@ spec:
               port: 61208
       securityContext:
         container:
-          PUID: 0
-          runAsGroup: 0
-          runAsUser: 0
+          PUID: 1000
+          runAsGroup: 1000
+          runAsUser: 1000
       resources:
         limits:
           nvidia.com/gpu: 1
