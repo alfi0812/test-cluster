@@ -34,6 +34,8 @@ spec:
           podSpec:
             # Needed for Running Tasks
             hostPID: true
+            # Needed for Host Network Stats
+            hostNetwork: true
             runtimeClassName: "nvidia"
             containers:
               main:
@@ -42,8 +44,6 @@ spec:
                   NVIDIA_VISIBLE_DEVICES: all
       service:
         main:
-          type: LoadBalancer
-          LoadBalancerIP: 192.168.178.254
           ports:
             main:
               port: 61208
@@ -55,3 +55,20 @@ spec:
       resources:
         limits:
           nvidia.com/gpu: 1
+          ingress:
+      ingress:
+        main:
+          enabled: true
+          integrations:
+            traefik:
+              enabled: true
+              entrypoints:
+              - websecure
+            certManager:
+              enabled: true
+              certificateIssuer: domain-0-le-prod
+          hosts:
+            - host: test.${DOMAIN_0}
+              paths:
+                - path: /
+                  pathType: Prefix
