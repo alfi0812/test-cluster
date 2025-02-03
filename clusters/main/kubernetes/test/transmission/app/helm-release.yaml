@@ -32,7 +32,7 @@ spec:
         image:
             repository: docker.io/linuxserver/transmission
             pullPolicy: IfNotPresent
-            tag: 4.0.6@sha256:1159f11d63ac598da75f37b19326d792e0fec37d05630a7891891886b34a505a
+            tag: 2021.11.18@sha256:9944fcda726c9749914b06268e5435c5ba057191fde0052013c8f84c303763a4
         securityContext:
             container:
                 readOnlyRootFilesystem: false
