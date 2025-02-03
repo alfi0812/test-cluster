@@ -29,6 +29,9 @@ spec:
             main:
                 loadBalancerIP: 192.168.178.254
                 type: LoadBalancer
+                ports:
+                    main:
+                        port: 9091
         image:
             repository: docker.io/linuxserver/transmission
             pullPolicy: IfNotPresent
@@ -43,4 +46,11 @@ spec:
             watch:
                 enabled: true
                 mountPath: /watch
+        workload:
+            main:
+                podSpec:
+                    containers:
+                        main:
+                            env: 
+                                PEERPORT: "{{ .Values.service.torrent.ports.torrent.port }}"
 
