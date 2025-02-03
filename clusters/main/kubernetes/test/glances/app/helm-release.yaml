@@ -33,8 +33,7 @@ spec:
         main:
           podSpec:
             # hostPID: true
-            # hostIPC: true
-            hostUsers: true
+            hostIPC: true
             runtimeClassName: "nvidia"
             containers:
               main:
