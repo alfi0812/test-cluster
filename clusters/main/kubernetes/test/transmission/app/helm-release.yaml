@@ -39,4 +39,8 @@ spec:
                 runAsNonRoot: false
                 runAsUser: 0
                 runAsGroup: 0
+        persistence:
+            watch:
+                enabled: true
+                mountPath: /watch
 
