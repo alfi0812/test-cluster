@@ -35,7 +35,8 @@ spec:
             containers:
               main:
                 env:
-                  GLANCES_OPT: "-w -d -C /glances/conf/glances.conf"
+                  GLANCES_OPT: "-w"
+      hostNetwork: true
       service:
         main:
           type: LoadBalancer
@@ -45,9 +46,7 @@ spec:
               port: 61208
       securityContext:
         container:
-          PUID: 0
-          readOnlyRootFilesystem: false
-          runAsGroup: 0
-          runAsNonRoot: false
-          runAsUser: 0
-          privileged: true
+          PUID: 1000
+      resources:
+        limits:
+          nvidia.com/gpu: 1
