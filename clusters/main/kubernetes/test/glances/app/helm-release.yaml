@@ -32,8 +32,8 @@ spec:
       workload:
         main:
           podSpec:
-            hostPID: true
-            hostIPC: true
+            # hostPID: true
+            # hostIPC: true
             hostUsers: true
             runtimeClassName: "nvidia"
             containers:
