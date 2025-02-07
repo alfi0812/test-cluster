@@ -48,7 +48,6 @@ spec:
         dnsChallenge:
           enabled: false
           domain: dns01.clouddns.com
-
       forward:
         enabled: false
         primary: tls://1.1.1.1
@@ -61,13 +60,14 @@ spec:
     queryLog:
       # optional one of: mysql, postgresql, csv, csv-client. If empty, log to console only
       type: ""
-
     configmap:
       dashboard:
         enabled: false
       datasource:
         enabled: false
-
     cnpg:
+      main:
+        enabled: false
+    metrics:
       main:
         enabled: false

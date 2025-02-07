@@ -29,6 +29,8 @@ spec:
         enabled: true
       prometheusOperator:
         enabled: true
+        serviceMonitor:
+          selfMonitor: false
       ## Everything down here, explicitly disables everything BUT the operator itself
       global:
         rbac:
