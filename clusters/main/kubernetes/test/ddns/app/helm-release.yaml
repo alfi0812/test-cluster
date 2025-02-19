@@ -25,44 +25,19 @@ spec:
         remediation:
             retries: 3
     values:
+      config:
+        settings:
+          - provider: cloudflare
+            zone_identifier: "${DOMAIN_0_ZONE_IDENT}"
+            domain: "${DOMAIN_0}"
+            ttl: 600
+            token: "${DDNS_UPDATER_TOKEN}"
+            ip_version: ipv4
+            ipv6_suffix: ""
       workload:
         main:
           podSpec:
             containers:
               main:
                 env:
-                  CONFIG: |
-                    {
-                      "settings": [
-                        {
-                          "provider": "cloudflare",
-                          "zone_identifier": "ZONE_ID",
-                          "domain": "MY_DOMAIN_1.com",
-                          "host": "@",
-                          "proxied": true,
-                          "ttl": 600,
-                          "token": "TOKEN_1",
-                          "ip_version": "ipv4"
-                        },
-                        {
-                          "provider": "cloudflare",
-                          "zone_identifier": "ZONE_ID_2",
-                          "domain": "MY_DOMAIN_2.com",
-                          "host": "@",
-                          "proxied": true,
-                          "ttl": 600,
-                          "token": "TOKEN_2",
-                          "ip_version": "ipv4"
-                        },
-                        {
-                          "provider": "cloudflare",
-                          "zone_identifier": "ZONE_ID_3",
-                          "domain": "MY_DOMAIN_3.com",
-                          "host": "@",
-                          "proxied": true,
-                          "ttl": 600,
-                          "token": "TOKEN_3",
-                          "ip_version": "ipv4"
-                        }
-                      ]
-                    }
+                  CONFIG: "{{ toJson .Values.config | toString }}"
