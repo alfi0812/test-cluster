@@ -40,4 +40,4 @@ spec:
             containers:
               main:
                 env:
-                  CONFIG: {{ .Values.config | toJson | squote }}
+                  CONFIG: "{{ .Values.config | toJson | squote }}"
