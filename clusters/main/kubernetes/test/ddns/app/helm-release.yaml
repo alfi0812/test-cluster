@@ -1,0 +1,68 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: ddns
+    namespace: ddns
+spec:
+    interval: 5m
+    chart:
+        spec:
+            # renovate: registryUrl=https://charts.truechartsoci.org
+            chart: ddns-updater
+            version: 11.8.1
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+            interval: 5m
+    install:
+        createNamespace: true
+        crds: CreateReplace
+        remediation:
+            retries: 3
+    upgrade:
+        crds: CreateReplace
+        remediation:
+            retries: 3
+    values:
+      workload:
+        main:
+          podSpec:
+            containers:
+              main:
+                env:
+                  CONFIG: |
+                    {
+                      "settings": [
+                        {
+                          "provider": "cloudflare",
+                          "zone_identifier": "ZONE_ID",
+                          "domain": "MY_DOMAIN_1.com",
+                          "host": "@",
+                          "proxied": true,
+                          "ttl": 600,
+                          "token": "TOKEN_1",
+                          "ip_version": "ipv4"
+                        },
+                        {
+                          "provider": "cloudflare",
+                          "zone_identifier": "ZONE_ID_2",
+                          "domain": "MY_DOMAIN_2.com",
+                          "host": "@",
+                          "proxied": true,
+                          "ttl": 600,
+                          "token": "TOKEN_2",
+                          "ip_version": "ipv4"
+                        },
+                        {
+                          "provider": "cloudflare",
+                          "zone_identifier": "ZONE_ID_3",
+                          "domain": "MY_DOMAIN_3.com",
+                          "host": "@",
+                          "proxied": true,
+                          "ttl": 600,
+                          "token": "TOKEN_3",
+                          "ip_version": "ipv4"
+                        }
+                      ]
+                    }
