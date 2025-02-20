@@ -1,0 +1,93 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: librespeed
+    namespace: librespeed
+spec:
+    interval: 5m
+    chart:
+        spec:
+            # renovate: registryUrl=https://charts.truechartsoci.org
+            chart: plant-it
+            version: 1.16.6
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+            interval: 5m
+    install:
+        createNamespace: true
+        crds: CreateReplace
+        remediation:
+            retries: 3
+    upgrade:
+        crds: CreateReplace
+        remediation:
+            retries: 3
+    values:
+      image:
+        repository: docker.io/msdeluise/plant-it-server
+        pullPolicy: IfNotPresent
+        tag: 0.10.0@sha256:23ddf8660087d6b9f5dbdca2ca09817b84db45cb2d9d6e2e0176e70f514629e7
+      securityContext:
+        container:
+          runAsNonRoot: false
+          readOnlyRootFilesystem: false
+          runAsUser: 0
+          runAsGroup: 0
+          
+      workload:
+        main:
+          podSpec:
+            containers:
+              main:
+                env:
+                  MYSQL_HOST:
+                    secretKeyRef:
+                      expandObjectName: false
+                      name: '{{ printf "%s-%s" .Release.Name "mariadbcreds" }}'
+                      key: plainhost
+                  MYSQL_PORT: "3306"
+                  MYSQL_USERNAME: "{{ .Values.mariadb.mariadbUsername }}"
+                  MYSQL_PSW: "{{ .Values.mariadb.password }}"
+                  MYSQL_DATABASE: "{{ .Values.mariadb.mariadbDatabase }}"
+                  MYSQL_ROOT_PASSWORD: "{{ .Values.mariadb.rootPassword }}"
+                  JWT_SECRET: "MyJWTSecret"
+                  JWT_EXP: 1
+                  USER_LIMIT: -1
+                  UPLOAD_DIR: /uploads
+                  API_PORT: "{{ .Values.service.main.ports.api.port }}"
+                  TREFLE_KEY: ""
+                  LOG_LEVEL: INFO
+                  ALLOWED_ORIGINS: "*"
+                  CACHE_TTL: 86400
+                  CACHE_HOST:
+                    secretKeyRef:
+                      expandObjectName: false
+                      name: '{{ printf "%s-%s" .Release.Name "rediscreds" }}'
+                      key: plainhost
+                  CACHE_PORT: 6379
+                  SSL_ENABLED: false
+                  CERTIFICATE_PATH: /certificates/
+
+      service:
+        main:
+          enabled: true
+          ports:
+            main:
+              enabled: true
+              targetPort: 3000
+              port: 3000
+            api:
+              enabled: true
+              port: 9701
+
+      persistence:
+        uploads:
+          enabled: true
+          mountPath: /uploads
+        certificates:
+          enabled: true
+          mountPath: /certificates
+        varrun:
+          enabled: false
