@@ -37,6 +37,7 @@ spec:
       container:
         readOnlyRootFilesystem: false
         runAsNonRoot: true
+        PUID: 33
         runAsUser: 33
         runAsGroup: 33
     workload:
@@ -65,7 +66,7 @@ spec:
                 APP_URL: ""
                 TRUSTED_PROXIES: "172.16.0.0/16"
                 DB_HOST:
-                secretKeyRef:
+                 secretKeyRef:
                     name: cnpg-main-urls
                     key: host
                 DB_PASSWORD:
