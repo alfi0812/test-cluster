@@ -37,9 +37,8 @@ spec:
       container:
         readOnlyRootFilesystem: false
         runAsNonRoot: true
-        PUID: 33
-        runAsUser: 33
-        runAsGroup: 0
+        runAsUser: 568
+        runAsGroup: 568
     workload:
       main:
         podSpec:
