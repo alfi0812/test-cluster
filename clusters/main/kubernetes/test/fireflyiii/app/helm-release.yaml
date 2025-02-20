@@ -37,7 +37,6 @@ spec:
       container:
         readOnlyRootFilesystem: false
         runAsNonRoot: true
-        PUID: 33
         runAsUser: 33
         runAsGroup: 33
     workload:
@@ -97,6 +96,8 @@ spec:
       data:
         enabled: true
         mountPath: "/var/www/html/storage/upload"
+      varrun:
+        enabled: false
     cronjob:
       schedule: "0 3 * * *"
       annotations: {}
