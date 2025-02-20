@@ -82,6 +82,7 @@ spec:
                   secretKeyRef:
                     name: firefly-secrets
                     key: STATIC_CRON_TOKEN
+                APP_KEY: SomeRandomStringOf32CharsExactly
     service:
       main:
         ports:
@@ -93,7 +94,8 @@ spec:
         enabled: true
         mountPath: "/var/www/html/storage/upload"
       varrun:
-        enabled: false
+        enabled: true
+        defaultMode: "0777"
     cronjob:
       schedule: "0 3 * * *"
       annotations: {}
