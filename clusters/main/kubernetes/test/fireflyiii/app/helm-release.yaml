@@ -36,7 +36,7 @@ spec:
     securityContext:
       container:
         readOnlyRootFilesystem: false
-        runAsNonRoot: true
+        runAsNonRoot: false
         runAsUser: 568
         runAsGroup: 568
     workload:
