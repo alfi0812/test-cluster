@@ -83,7 +83,10 @@ spec:
                   secretKeyRef:
                     name: firefly-secrets
                     key: STATIC_CRON_TOKEN
-                APP_KEY: exactly-32-characters-app-keyyyy
+                APP_KEY:
+                  secretKeyRef:
+                    name: firefly-secrets
+                    key: APP_KEY
     service:
       main:
         ports:
