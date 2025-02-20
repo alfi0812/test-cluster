@@ -37,8 +37,8 @@ spec:
       container:
         readOnlyRootFilesystem: false
         runAsNonRoot: false
-        runAsUser: 568
-        runAsGroup: 568
+        runAsUser: 0
+        runAsGroup: 0
     workload:
       main:
         podSpec:
@@ -96,6 +96,8 @@ spec:
       data:
         enabled: true
         mountPath: "/var/www/html/storage/upload"
+      varrun:
+        enabled: false
     cronjob:
       schedule: "0 3 * * *"
       annotations: {}
