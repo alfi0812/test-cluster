@@ -32,7 +32,7 @@ spec:
     image:
       repository: docker.io/fireflyiii/core
       pullPolicy: IfNotPresent
-      tag: version-6.2.2
+      tag: version-6.2.7@sha256:dc78dac2d3db78665e17c89f5075602ec8f7c84d10610a7888e633b83334a340
     securityContext:
       container:
         readOnlyRootFilesystem: false
