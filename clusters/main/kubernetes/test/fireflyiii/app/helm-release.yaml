@@ -93,6 +93,8 @@ spec:
       data:
         enabled: true
         mountPath: "/var/www/html/storage/upload"
+      varrun:
+        enabled: true
     cronjob:
       schedule: "0 3 * * *"
       annotations: {}
