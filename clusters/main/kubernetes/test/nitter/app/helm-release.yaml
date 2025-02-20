@@ -68,7 +68,7 @@ spec:
           enabled: true
           data:
             sessions.jsonl: |
-              {"oauth_token": "${TEST_1}", "oauth_token_secret": "${TEST_2}"}
+              {"oauth_token": "TOKEN", "oauth_token_secret": "SECRET"}
 
       workload:
         main:
