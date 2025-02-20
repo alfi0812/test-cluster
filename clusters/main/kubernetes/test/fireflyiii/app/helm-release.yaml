@@ -37,8 +37,8 @@ spec:
       container:
         readOnlyRootFilesystem: false
         runAsNonRoot: true
-        runAsUser: 568
-        runAsGroup: 568
+        runAsUser: 33
+        runAsGroup: 33
     workload:
       main:
         podSpec:
@@ -82,7 +82,6 @@ spec:
                   secretKeyRef:
                     name: firefly-secrets
                     key: STATIC_CRON_TOKEN
-                APP_KEY: SomeRandomStringOf32CharsExactly
     service:
       main:
         ports:
@@ -93,9 +92,6 @@ spec:
       data:
         enabled: true
         mountPath: "/var/www/html/storage/upload"
-      run:
-        enabled: true
-        mountPath: "/run"
       varrun:
         enabled: false
     cronjob:
