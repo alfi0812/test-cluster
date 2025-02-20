@@ -43,7 +43,7 @@ spec:
     workload:
       main:
         podSpec:
-        containers:
+          containers:
             main:
               probes:
                 liveness:
