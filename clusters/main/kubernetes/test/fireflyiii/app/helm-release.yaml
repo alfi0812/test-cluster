@@ -35,7 +35,7 @@ spec:
       tag: version-6.2.7@sha256:dc78dac2d3db78665e17c89f5075602ec8f7c84d10610a7888e633b83334a340
     securityContext:
       container:
-        readOnlyRootFilesystem: true
+        readOnlyRootFilesystem: false
         runAsNonRoot: true
         runAsUser: 568
         runAsGroup: 568
