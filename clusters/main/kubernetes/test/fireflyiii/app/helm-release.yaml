@@ -46,11 +46,11 @@ spec:
             main:
               probes:
                 liveness:
-                  path: "/login"
+                  path: "/healthcheck"
                 readiness:
-                  path: "/login"
+                  path: "/healthcheck"
                 startup:
-                  path: "/login"
+                  path: "/healthcheck"
               env:
                 DB_USERNAME: "{{ .Values.cnpg.main.user }}"
                 DB_DATABASE: "{{ .Values.cnpg.main.database }}"
@@ -82,6 +82,7 @@ spec:
                   secretKeyRef:
                     name: firefly-secrets
                     key: STATIC_CRON_TOKEN
+                APP_KEY: exactly-32-characters-app-keyyyy
     service:
       main:
         ports:
