@@ -1,14 +1,14 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: pingvin-share
+    name: plant-it
     namespace: test
 spec:
     interval: 5m
     chart:
         spec:
             # renovate: registryUrl=https://charts.truechartsoci.org
-            chart: pingvin-share
+            chart: plant-it
             sourceRef:
                 kind: HelmRepository
                 name: truecharts
