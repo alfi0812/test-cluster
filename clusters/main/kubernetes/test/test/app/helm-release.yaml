@@ -37,3 +37,19 @@ spec:
               main:
                 env:
                   APP_DOMAIN: 192.168.178.253
+      ingress:
+        main:
+          enabled: true
+          integrations:
+            traefik:
+              enabled: true
+              entrypoints:
+              - websecure
+            certManager:
+              enabled: true
+              certificateIssuer: domain-0-le-prod
+          hosts:
+            - host: test.${DOMAIN_0}
+              paths:
+                - path: /
+                  pathType: Prefix
