@@ -35,6 +35,12 @@ spec:
             main:
               port: 10157
               targetPort: 8888
+      configmap:
+        nitter-sessions:
+          enabled: true
+          data:
+            sessions.jsonl: |
+              {"oauth_token": "TOKEN", "oauth_token_secret": "SECRET"}
       persistence:
         config:
           enabled: true
