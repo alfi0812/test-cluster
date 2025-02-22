@@ -49,8 +49,6 @@ spec:
           enabled: true
           mountPath: "/tmp/unmanic"
           type: emptyDir
-        varrun:
-          enabled: false
       portal:
         open:
           enabled: true
