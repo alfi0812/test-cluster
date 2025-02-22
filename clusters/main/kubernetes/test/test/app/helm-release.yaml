@@ -1,14 +1,14 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: flashpaper
+    name: gatus
     namespace: test
 spec:
     interval: 5m
     chart:
         spec:
             # renovate: registryUrl=https://charts.truechartsoci.org
-            chart: flashpaper
+            chart: gatus
             sourceRef:
                 kind: HelmRepository
                 name: truecharts
@@ -30,14 +30,3 @@ spec:
         main:
           loadBalancerIP: 192.168.178.253
           type: LoadBalancer
-      image:
-        pullPolicy: IfNotPresent
-        repository: ghcr.io/andrewpaglusch/flashpaper
-        tag: master@sha256:5217032ad5779e617a1179cbe92fb4c45ede22c12b6d5697d2fda6779c349c8d
-      persistence:
-        data:
-          enabled: true
-          mountPath: /var/www/html/data
-        varrun:
-          enabled: false
-
