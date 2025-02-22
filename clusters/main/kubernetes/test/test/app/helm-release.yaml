@@ -36,7 +36,7 @@ spec:
             containers:
               main:
                 env:
-                  APP_DOMAIN: 192.168.178.253
+                  APP_DOMAIN: test.cluster-test.de
       ingress:
         main:
           enabled: true
