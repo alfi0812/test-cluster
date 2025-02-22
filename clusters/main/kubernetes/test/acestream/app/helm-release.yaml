@@ -1,0 +1,60 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: acestream
+    namespace: acestream
+spec:
+    interval: 5m
+    chart:
+        spec:
+            # renovate: registryUrl=https://charts.truechartsoci.org
+            chart: acestream
+            version: 8.6.1
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+            interval: 5m
+    install:
+        createNamespace: true
+        crds: CreateReplace
+        remediation:
+            retries: 3
+    upgrade:
+        crds: CreateReplace
+        remediation:
+            retries: 3
+    values:
+      image:
+        pullPolicy: IfNotPresent
+        repository: docker.io/vstavrinov/acestream-service
+        tag: 2.1.1.1@sha256:7b621e41bdcb971a5181d6f50a8ac6621d845c6ef185fb8f7798a897470e317c
+      persistence:
+        acestreamcache:
+          enabled: true
+          mountPath: /srv/acestream/.ACEStream
+        devshm:
+          enabled: false
+      portal:
+        open:
+          enabled: true
+      securityContext:
+        container:
+          readOnlyRootFilesystem: false
+          runAsGroup: 0
+          runAsUser: 0
+      service:
+        main:
+          ports:
+            main:
+              port: 8008
+              protocol: tcp
+      workload:
+        main:
+          podSpec:
+            containers:
+              main:
+                env:
+                  ENTRY: "{{ .Values.service.main.ports.main.port }}"
+                  PORT: "{{ .Values.service.main.ports.main.port }}"
+                  SCHEME: http
