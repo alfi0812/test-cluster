@@ -39,5 +39,5 @@ spec:
           enabled: true
           mountPath: /var/www/html/data
         varrun:
-          enabled: true
+          enabled: false
 
