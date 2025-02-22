@@ -49,4 +49,4 @@ spec:
             containers:
               main:
                 env:
-                  ALLOWED_ORIGINS: "test.cluster-test.de"
+                  ALLOWED_ORIGINS: "https://test.cluster-test.de/"
