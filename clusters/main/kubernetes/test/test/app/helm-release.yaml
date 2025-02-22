@@ -1,14 +1,14 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: docuseal
+    name: flashpaper
     namespace: test
 spec:
     interval: 5m
     chart:
         spec:
             # renovate: registryUrl=https://charts.truechartsoci.org
-            chart: docuseal
+            chart: flashpaper
             sourceRef:
                 kind: HelmRepository
                 name: truecharts
