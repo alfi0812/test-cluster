@@ -1,15 +1,14 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: cannery
+    name: comet
     namespace: test
 spec:
     interval: 5m
     chart:
         spec:
             # renovate: registryUrl=https://charts.truechartsoci.org
-            chart: cannery
-            version: 0.3.2
+            chart: comet
             sourceRef:
                 kind: HelmRepository
                 name: truecharts
