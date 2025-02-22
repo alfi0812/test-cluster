@@ -1,14 +1,14 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: mixpost
+    name: pairdrop
     namespace: test
 spec:
     interval: 5m
     chart:
         spec:
             # renovate: registryUrl=https://charts.truechartsoci.org
-            chart: mixpost
+            chart: pairdrop
             sourceRef:
                 kind: HelmRepository
                 name: truecharts
@@ -30,16 +30,6 @@ spec:
         main:
           loadBalancerIP: 192.168.178.253
           type: LoadBalancer
-      workload:
-        main:
-          podSpec:
-            containers:
-              main:
-                env:
-                  APP_DOMAIN: test.cluster-test.de
-                  APP_URL: https://test.cluster-test.de
-                  APP_DEBUG: true
-                  APP_KEY: MySecretKey
       ingress:
         main:
           enabled: true
