@@ -1,15 +1,14 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: ps3netsrv
+    name: sd-webui-docker
     namespace: test
 spec:
     interval: 5m
     chart:
         spec:
             # renovate: registryUrl=https://charts.truechartsoci.org
-            chart: ps3netsrv
-            version: 1.7.1
+            chart: sd-webui-docker
             sourceRef:
                 kind: HelmRepository
                 name: truecharts
@@ -44,10 +43,3 @@ spec:
               paths:
                 - path: /
                   pathType: Prefix
-      workload:
-        main:
-          podSpec:
-            containers:
-              main:
-                env:
-                  ALLOWED_ORIGINS: "*"
