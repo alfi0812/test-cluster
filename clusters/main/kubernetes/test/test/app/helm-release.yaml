@@ -49,6 +49,8 @@ spec:
             containers:
               main:
                 env:
+                  args:
+                    - "--skip-version-check --allow-code --enable-insecure-extension-access --api --xformers --opt-chan"
                   SD_WEBUI_VARIANT: "default"
       securityContext:
         container:
