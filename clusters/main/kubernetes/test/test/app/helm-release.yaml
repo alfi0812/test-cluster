@@ -1,14 +1,14 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: ps3netsrv
+    name: riven
     namespace: test
 spec:
     interval: 5m
     chart:
         spec:
             # renovate: registryUrl=https://charts.truechartsoci.org
-            chart: ps3netsrv
+            chart: riven
             sourceRef:
                 kind: HelmRepository
                 name: truecharts
