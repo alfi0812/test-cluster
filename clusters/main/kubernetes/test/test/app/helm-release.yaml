@@ -27,19 +27,7 @@ spec:
     values:
       global:
         stopAll: false
-      ingress:
+      service:
         main:
-          enabled: true
-          integrations:
-            traefik:
-              enabled: true
-              entrypoints:
-              - websecure
-            certManager:
-              enabled: true
-              certificateIssuer: domain-0-le-prod
-          hosts:
-            - host: test.${DOMAIN_0}
-              paths:
-                - path: /
-                  pathType: Prefix
+          loadBalancerIP: 192.168.178.253
+          type: LoadBalancer
