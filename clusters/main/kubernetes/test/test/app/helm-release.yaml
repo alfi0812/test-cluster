@@ -43,3 +43,10 @@ spec:
               paths:
                 - path: /
                   pathType: Prefix
+      workload:
+        main:
+          podSpec:
+            containers:
+              main:
+                env:
+                  ALLOWED_ORIGINS: "test.cluster-test.de"
