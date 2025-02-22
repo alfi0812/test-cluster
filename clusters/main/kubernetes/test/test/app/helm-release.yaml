@@ -1,14 +1,14 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: prometheus-pve-exporter
+    name: ps3netsrv
     namespace: test
 spec:
     interval: 5m
     chart:
         spec:
             # renovate: registryUrl=https://charts.truechartsoci.org
-            chart: prometheus-pve-exporter
+            chart: ps3netsrv
             sourceRef:
                 kind: HelmRepository
                 name: truecharts
