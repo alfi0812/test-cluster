@@ -33,6 +33,10 @@ spec:
         acestreamcache:
           enabled: true
           mountPath: /srv/acestream/.ACEStream
+        tmp:
+          enabled: false
+        devshm:
+          enabled: false
       portal:
         open:
           enabled: true
