@@ -30,3 +30,7 @@ spec:
         main:
           loadBalancerIP: 192.168.178.253
           type: LoadBalancer
+      image:
+        pullPolicy: IfNotPresent
+        repository: ghcr.io/andrewpaglusch/flashpaper
+        tag: master@sha256:86fba187d74884dc759abb2f655fec28378d67455a1ebe73b3e6eb4c59f99b3f
