@@ -37,6 +37,8 @@ spec:
               main:
                 env:
                   APP_DOMAIN: test.cluster-test.de
+                  APP_URL: https://test.cluster-test.de
+                  APP_DEBUG: true
       ingress:
         main:
           enabled: true
@@ -45,9 +47,6 @@ spec:
               enabled: true
               entrypoints:
               - websecure
-            certManager:
-              enabled: true
-              certificateIssuer: domain-0-le-prod
           hosts:
             - host: test.${DOMAIN_0}
               paths:
