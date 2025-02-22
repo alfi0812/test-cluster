@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - librespeed/ks.yaml 
   - strapi/ks.yaml
+  - acestream/ks.yaml
