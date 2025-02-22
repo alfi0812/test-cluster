@@ -1,14 +1,14 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: semaphore
+    name: slskd
     namespace: test
 spec:
     interval: 5m
     chart:
         spec:
             # renovate: registryUrl=https://charts.truechartsoci.org
-            chart: semaphore
+            chart: slskd
             sourceRef:
                 kind: HelmRepository
                 name: truecharts
