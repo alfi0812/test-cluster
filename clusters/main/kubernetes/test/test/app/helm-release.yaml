@@ -1,14 +1,14 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: plant-it
+    name: prometheus-pve-exporter
     namespace: test
 spec:
     interval: 5m
     chart:
         spec:
             # renovate: registryUrl=https://charts.truechartsoci.org
-            chart: plant-it
+            chart: prometheus-pve-exporter
             sourceRef:
                 kind: HelmRepository
                 name: truecharts
@@ -49,5 +49,4 @@ spec:
             containers:
               main:
                 env:
-                  ALLOWED_ORIGINS: "https://test.cluster-test.de/"
-                  SSL_ENABLED: true
+                  ALLOWED_ORIGINS: "*"
