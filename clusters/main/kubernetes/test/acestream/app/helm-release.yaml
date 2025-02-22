@@ -29,9 +29,24 @@ spec:
         pullPolicy: IfNotPresent
         repository: ghcr.io/vstavrinov/acestream-service
         tag: 2.1.1.1@sha256:3887de78f7ca80e46ea8d80ec846dd20844cec85999610b3ebf6e7af6c19fb48
+      persistence:
+        acestreamcache:
+          enabled: true
+          mountPath: /srv/acestream/.ACEStream
+        tmp:
+          enabled: false
+        devshm:
+          enabled: false
+        varrun:
+          enabled: false
       portal:
         open:
           enabled: true
+      securityContext:
+        container:
+          readOnlyRootFilesystem: false
+          runAsUser: 0
+          runAsGroup: 0
       service:
         main:
           ports:
