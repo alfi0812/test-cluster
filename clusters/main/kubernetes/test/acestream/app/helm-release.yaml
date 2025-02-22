@@ -26,4 +26,4 @@ spec:
             retries: 3
     values:
       image:
-        tag: 2.0.3
+        tag: 2.0.4
