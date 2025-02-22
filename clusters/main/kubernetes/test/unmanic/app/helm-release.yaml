@@ -36,11 +36,16 @@ spec:
               port: 10157
               targetPort: 8888
       configmap:
-        nitter-sessions:
+        patch:
           enabled: true
           data:
-            sessions.jsonl: |
-              {"oauth_token": "TOKEN", "oauth_token_secret": "SECRET"}
+            10-patch.sh: |
+              {% macro patch() -%}
+              chmod +x /etc/cont-init.d/20-config
+              chmod +x /etc/cont-init.d/30-patch-nvidia
+              chmod +x /etc/cont-init.d/60-custom-setup-script
+              chmod +x /etc/services.d/unmanic/run
+              {%- endmacro %}
       persistence:
         config:
           enabled: true
@@ -55,6 +60,13 @@ spec:
           enabled: true
           mountPath: "/tmp/unmanic"
           type: emptyDir
+        patch:
+          enabled: true
+          type: configmap
+          objectName: patch
+          mountPath: /etc/cont-init.d/10-patch.sh
+          subPath: 10-patch.sh
+          readOnly: true
       portal:
         open:
           enabled: true
