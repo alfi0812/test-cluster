@@ -65,6 +65,7 @@ spec:
           mountPath: /etc/cont-init.d/10-patch.sh
           subPath: 10-patch.sh
           readOnly: true
+          defaultMode: "0755"
       portal:
         open:
           enabled: true
