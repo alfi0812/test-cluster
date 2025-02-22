@@ -50,3 +50,4 @@ spec:
               main:
                 env:
                   ALLOWED_ORIGINS: "https://test.cluster-test.de/"
+                  SSL_ENABLED: true
