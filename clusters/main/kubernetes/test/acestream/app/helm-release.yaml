@@ -31,10 +31,8 @@ spec:
         tag: 2.1.1.1@sha256:7b621e41bdcb971a5181d6f50a8ac6621d845c6ef185fb8f7798a897470e317c
       persistence:
         acestreamcache:
-          enabled: false
+          enabled: true
           mountPath: /srv/acestream/.ACEStream
-        devshm:
-          enabled: false
       portal:
         open:
           enabled: true
