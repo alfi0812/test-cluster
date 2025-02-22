@@ -27,8 +27,8 @@ spec:
     values:
       image:
         pullPolicy: IfNotPresent
-        repository: ghcr.io/vstavrinov/acestream-engine
-        tag: 3.2.3-1@sha256:181d4ef945301613a6f173662a5abad0eade324ee2e519f22704a1aa2ea43e91
+        repository: ghcr.io/vstavrinov/acestream-service
+        tag: 2.1.1.1@sha256:3887de78f7ca80e46ea8d80ec846dd20844cec85999610b3ebf6e7af6c19fb48
       persistence:
         acestreamcache:
           enabled: true
