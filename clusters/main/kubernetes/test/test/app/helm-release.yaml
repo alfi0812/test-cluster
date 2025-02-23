@@ -8,8 +8,7 @@ spec:
     chart:
         spec:
             # renovate: registryUrl=https://charts.truechartsoci.org
-            chart: van-dam
-            version: 0.27.1
+            chart: manyfold
             sourceRef:
                 kind: HelmRepository
                 name: truecharts
