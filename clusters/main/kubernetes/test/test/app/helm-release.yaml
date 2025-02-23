@@ -44,19 +44,3 @@ spec:
               paths:
                 - path: /
                   pathType: Prefix
-      securityContext:
-        container:
-          readOnlyRootFilesystem: false
-          runAsNonRoot: false
-          runAsGroup: 0
-          runAsUser: 0
-      persistence:
-        varrun:
-          enabled: false
-      workload:
-        main:
-          podSpec:
-            containers:
-              main:
-                env:
-                  SD_WEBUI_VARIANT: "general"
