@@ -9,6 +9,7 @@ spec:
         spec:
             # renovate: registryUrl=https://charts.truechartsoci.org
             chart: sd-webui
+            version: 2.5.1
             sourceRef:
                 kind: HelmRepository
                 name: truecharts
