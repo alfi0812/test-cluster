@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: manyfold
+    name: hasty-paste
     namespace: test
 spec:
     interval: 5m
@@ -75,8 +75,9 @@ spec:
               main:
                 envFrom:
                 env:
-                  AUTH_TOKEN_SECRET: "${AUTH_TOKEN_SECRET}"
-                  SESSION_SECRET: "${SESSION_SECRET}"
+                  PUBLIC_URL: "http://example.com"
+                  AUTH_TOKEN_SECRET: "Fuhjm9Vy8EuNICH6bQ1YM-Jlht0HXhS_7-hmgZ1E6LI"
+                  SESSION_SECRET: "Fuhjm9Vy8EuNICH6bQ1YM-Jlht0HXhS_7-hmgZ1E6LI"
                   BIND__PORT: "{{ .Values.service.main.ports.main.port }}"
                   BEHIND_PROXY: true
                 probes:
