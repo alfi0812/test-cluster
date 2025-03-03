@@ -58,7 +58,7 @@ spec:
         open:
           enabled: true
       redis:
-        enabled: false
+        enabled: true
         username: default
       service:
         main:
