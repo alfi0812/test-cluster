@@ -76,8 +76,8 @@ spec:
                 envFrom:
                 env:
                   PUBLIC_URL: "http://example.com"
-                  AUTH_TOKEN_SECRET: "Fuhjm9Vy8EuNICH6bQ1YM-Jlht0HXhS_7-hmgZ1E6LI"
-                  SESSION_SECRET: "Fuhjm9Vy8EuNICH6bQ1YM-Jlht0HXhS_7-hmgZ1E6LI"
+                  AUTH_TOKEN_SECRET: N5DBbCZoB+huoGUKuHmToQ==
+                  SESSION_SECRET: N5DBbCZoB+huoGUKuHmToQ==
                   BIND__PORT: "{{ .Values.service.main.ports.main.port }}"
                   BEHIND_PROXY: true
                 probes:
