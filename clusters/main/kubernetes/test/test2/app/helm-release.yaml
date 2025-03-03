@@ -71,6 +71,7 @@ spec:
           podSpec:
             containers:
               main:
+                envFrom: 
                 env:
                   SPLUNK_START_ARGS: --accept-license
                   SPLUNK_PASSWORD: changeme
