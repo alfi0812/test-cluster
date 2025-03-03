@@ -8,8 +8,8 @@ spec:
     chart:
         spec:
             # renovate: registryUrl=https://charts.truechartsoci.org
-            chart: manyfold
-            version: 2.1.0
+            chart: hasty-paste
+            version: 8.11.6
             sourceRef:
                 kind: HelmRepository
                 name: truecharts
@@ -27,22 +27,65 @@ spec:
     values:
       global:
         stopAll: false
+      hastyPaste:
+        branding:
+          css_file: ""
+          description: ""
+          favicon: ""
+          hide_version: false
+          icon: ""
+          title: ""
+        enable_public_list: false
+        interface:
+          default_expire_time_days: 0
+          default_expire_time_enable: false
+          default_expire_time_hours: 1
+          default_expire_time_minutes: 0
+          default_use_long_id: false
+        log_level: INFO
+        max_body_size: 2000000
+        new_at_index: false
+        workers: 1
+      image:
+        pullPolicy: IfNotPresent
+        repository: ghcr.io/enchant97/hasty-paste
+        tag: 2.0.0@sha256:9afbe8703bb91ceb3b1e8de526155a980359981e838a42ded97548ef89b26869
+      persistence:
+        config:
+          enabled: true
+          mountPath: /app/data
+      portal:
+        open:
+          enabled: true
+      redis:
+        enabled: true
+        username: default
       service:
         main:
           loadBalancerIP: 192.168.178.253
           type: LoadBalancer
-      ingress:
+          ports:
+            main:
+              port: 10601
+              protocol: http
+      workload:
         main:
-          enabled: true
-          integrations:
-            traefik:
-              enabled: true
-              entrypoints:
-              - websecure
-          hosts:
-            - host: test.${DOMAIN_0}
-              paths:
-                - path: /
-                  pathType: Prefix
-      image:
-        tag: 0.101.0@sha256:0eae59e96af1679e690bb24056c618f33f57675e61901019831b43bef9e8ef86
+          podSpec:
+            containers:
+              main:
+                envFrom:
+                env:
+                  AUTH_TOKEN_SECRET: "${AUTH_TOKEN_SECRET}"
+                  SESSION_SECRET: "${SESSION_SECRET}"
+                  BIND__PORT: "{{ .Values.service.main.ports.main.port }}"
+                  BEHIND_PROXY: true
+                probes:
+                  liveness:
+                    custom: false
+                    enabled: true
+                  readiness:
+                    custom: false
+                    enabled: true
+                  startup:
+                    custom: false
+                    enabled: true
