@@ -1,15 +1,15 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: manyfold
+    name: splunk
     namespace: test
 spec:
     interval: 5m
     chart:
         spec:
             # renovate: registryUrl=https://charts.truechartsoci.org
-            chart: manyfold
-            version: 2.1.0
+            chart: splunk
+            version: 10.0.0
             sourceRef:
                 kind: HelmRepository
                 name: truecharts
@@ -25,24 +25,63 @@ spec:
         remediation:
             retries: 3
     values:
-      global:
-        stopAll: false
-      service:
-        main:
-          loadBalancerIP: 192.168.178.253
-          type: LoadBalancer
-      ingress:
-        main:
-          enabled: true
-          integrations:
-            traefik:
-              enabled: true
-              entrypoints:
-              - websecure
-          hosts:
-            - host: test.${DOMAIN_0}
-              paths:
-                - path: /
-                  pathType: Prefix
       image:
-        tag: 0.101.0@sha256:0eae59e96af1679e690bb24056c618f33f57675e61901019831b43bef9e8ef86
+        pullPolicy: IfNotPresent
+        repository: docker.io/splunk/splunk
+        tag: 9.4.1@sha256:6e7ef6ff9c2051d2281dce1dc6619cd5b4b5c1b40316f22e4c6627c51d0a1c83
+      securityContext:
+        container:
+          runAsNonRoot: false
+          readOnlyRootFilesystem: false
+          runAsUser: 0
+          runAsGroup: 0
+      service:
+        dataingest:
+          enabled: true
+          ports:
+            dataingest:
+              enabled: true
+              port: 9997
+              protocol: http
+              targetPort: 9997
+        main:
+          ports:
+            main:
+              port: 8000
+              protocol: http
+              targetPort: 8000
+        hec:
+          enabled: true
+          ports:
+            hec:
+              enabled: true
+              port: 8088
+              protocol: http
+              targetPort: 8088
+        management:
+          enabled: true
+          ports:
+            management:
+              enabled: true
+              port: 8089
+              protocol: http
+              targetPort: 8089
+      workload:
+        main:
+          podSpec:
+            containers:
+              main:
+                envFrom: 
+                env:
+                  SPLUNK_START_ARGS: --accept-license
+                  SPLUNK_PASSWORD: changeme
+      persistence:
+        appcreds:
+          enabled: true
+          mountPath: /opt/splunk/etc/
+        config:
+          enabled: true
+          mountPath: /opt/splunk/var
+        data:
+          enabled: true
+          mountPath: /splunkdata
