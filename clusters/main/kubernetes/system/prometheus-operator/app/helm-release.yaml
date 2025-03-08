@@ -25,6 +25,7 @@ spec:
         remediation:
             retries: 3
     values:
+      nameOverride: "prometheus-operator"
       crds:
         enabled: true
       prometheusOperator:
