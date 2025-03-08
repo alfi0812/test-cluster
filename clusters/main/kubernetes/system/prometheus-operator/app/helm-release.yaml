@@ -29,14 +29,11 @@ spec:
         enabled: true
       prometheusOperator:
         enabled: true
-        serviceMonitor:
-          selfMonitor: false
-      ## Everything down here, explicitly disables everything BUT the operator itself
       global:
         rbac:
           create: true
       defaultRules:
-        create: false
+        create: true
       windowsMonitoring:
         enabled: false
       prometheus-windows-exporter:
@@ -47,31 +44,31 @@ spec:
         enabled: false
       grafana:
         enabled: false
-        forceDeployDashboards: false
-        defaultDashboardsEnabled: false
+        forceDeployDashboards: true
+        defaultDashboardsEnabled: true
       kubernetesServiceMonitors:
-        enabled: false
+        enabled: true
       kubeApiServer:
-        enabled: false
+        enabled: true
       kubelet:
-        enabled: false
+        enabled: true
       kubeControllerManager:
-        enabled: false
+        enabled: true
       coreDns:
-        enabled: false
+        enabled: true
       kubeDns:
         enabled: false
       kubeEtcd:
-        enabled: false
+        enabled: true
       kubeScheduler:
-        enabled: false
+        enabled: true
       kubeProxy:
         enabled: false
       kubeStateMetrics:
-        enabled: false
+        enabled: true
       nodeExporter:
-        enabled: false
+        enabled: true
       prometheus:
-        enabled: false
+        enabled: true
       thanosRuler:
         enabled: false
