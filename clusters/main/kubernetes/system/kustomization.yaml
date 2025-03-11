@@ -12,6 +12,5 @@ resources:
   - spegel/ks.yaml
   - system-upgrade-controller/ks.yaml
   - traefik-crds/ks.yaml
-  - volsync/ks.yaml
   - generic-device-plugin/ks.yaml
   - nvidia-device-plugin/ks.yaml
