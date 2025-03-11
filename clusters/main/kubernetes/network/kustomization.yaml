@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
   - cloudflared/ks.yaml
   - nginx-external/ks.yaml
-  - nginx-internal/ks.yaml
