@@ -31,7 +31,6 @@ spec:
         service:
           externalTrafficPolicy: Local
           annotations:
-            external-dns.alpha.kubernetes.io/hostname: external.${DOMAIN_0}
             metallb.io/ip-allocated-from-pool: main
             metallb.io/loadBalancerIPs: ${NGINX_EXTERNAL_IP}
             metallb.universe.tf/ip-allocated-from-pool: main
