@@ -31,3 +31,4 @@ resources:
 # more goes here!
   - nvdp.yaml
   - backube.yaml
+  - ingress-nginx.yaml
