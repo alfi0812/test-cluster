@@ -31,4 +31,3 @@ resources:
 # more goes here!
   - nvdp.yaml
   - backube.yaml
-  - emberstack.yaml
