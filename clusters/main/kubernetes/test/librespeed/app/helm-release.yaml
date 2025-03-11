@@ -32,9 +32,7 @@ spec:
           enabled: true
           integrations:
             traefik:
-              enabled: true
-              entrypoints:
-              - websecure
+              enabled: false
           hosts:
             - host: libre.${DOMAIN_0}
               paths:
