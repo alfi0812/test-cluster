@@ -29,7 +29,7 @@ spec:
         stopAll: false
       ingress:
         main:
-          enabled: true
+          enabled: false
           integrations:
             traefik:
               enabled: false
