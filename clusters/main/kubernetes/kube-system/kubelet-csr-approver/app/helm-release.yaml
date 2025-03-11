@@ -9,17 +9,15 @@ spec:
     chart:
         spec:
             chart: kubelet-csr-approver
-            version: 1.4.2
+            version: 1.2.6
             sourceRef:
                 kind: HelmRepository
-                name: truecharts
+                name: postfinance
                 namespace: flux-system
             interval: 30m
     values:
-        workload:
-            main:
-                enabled: true
-                replicas: 1
+        providerRegex: ".*"
+        bypassDnsResolution: true
+        replicas: 1
         metrics:
-            main:
-                enabled: false
+            enable: false
