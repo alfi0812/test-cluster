@@ -22,7 +22,3 @@ spec:
     - hosts:
       - longhorn.${DOMAIN_0}
       secretName: longhorn-tls-0
-status:
-    loadBalancer:
-      ingress:
-      - ip: ${TRAEFIK_IP}
