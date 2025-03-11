@@ -53,7 +53,7 @@ spec:
       namespace: kube-system
     - kind: HelmRelease
       name: "*"
-      namespace: kyverno
+      namespace: kubernetes-reflector
     - kind: HelmRelease
       name: "*"
       namespace: librespeed
