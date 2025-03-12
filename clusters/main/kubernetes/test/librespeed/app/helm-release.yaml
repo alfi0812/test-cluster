@@ -35,6 +35,3 @@ spec:
               enabled: false
           hosts:
             - host: libre.${DOMAIN_0}
-              paths:
-                - path: /
-                  pathType: Prefix
