@@ -138,13 +138,8 @@ spec:
               chrome:
                 enabled: true
                 primary: true
-                command:
-                  - chromium-browser
-                  - --headless
+                args:
                   - --no-sandbox
-                  - --disable-gpu
-                  - --disable-software-rasterizer
-                  - --disable-dev-shm-usage
                   - --remote-debugging-address=0.0.0.0
                   - --remote-debugging-port=9222
                   - --hide-scrollbars
