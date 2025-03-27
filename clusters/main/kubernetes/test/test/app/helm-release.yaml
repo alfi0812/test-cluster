@@ -32,7 +32,7 @@ spec:
       chromeImage:
         repository: gcr.io/zenika-hub/alpine-chrome
         pullPolicy: IfNotPresent
-        tag: 124@sha256:e38563d4475a3d791e986500a2e4125c9afd13798067138881cf770b1f6f3980
+        tag: 123@sha256:e38563d4475a3d791e986500a2e4125c9afd13798067138881cf770b1f6f3980
       meiliImage:
         repository: docker.io/getmeili/meilisearch
         pullPolicy: IfNotPresent
@@ -42,6 +42,7 @@ spec:
         meili_master_key: another_random_string
       securityContext:
         container:
+          runAsNonRoot: false
           readOnlyRootFilesystem: false
           runAsUser: 0
           runAsGroup: 0
