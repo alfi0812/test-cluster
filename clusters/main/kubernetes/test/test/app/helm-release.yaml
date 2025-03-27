@@ -139,6 +139,7 @@ spec:
                 enabled: true
                 primary: true
                 command:
+                  - chromium-browser
                   - --no-sandbox
                   - --disable-gpu
                   - --disable-dev-shm-usage
