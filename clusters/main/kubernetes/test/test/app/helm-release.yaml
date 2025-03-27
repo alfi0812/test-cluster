@@ -140,7 +140,6 @@ spec:
                 primary: true
                 args:
                   - no-sandbox
-                  - disable-gpu
                 imageSelector: chromeImage
                 resources:
                   excludeExtra: true
