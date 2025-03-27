@@ -177,6 +177,8 @@ spec:
             meilisearch:
               meilisearch:
                 mountPath: "/meili_data"
+        devshm:
+          enabled: false
         varrun:
           enabled: false
         tmp:
