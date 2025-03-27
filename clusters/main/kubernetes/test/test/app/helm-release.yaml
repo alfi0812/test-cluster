@@ -42,7 +42,6 @@ spec:
         meili_master_key: another_random_string
       securityContext:
         container:
-          runAsNonRoot: false
           readOnlyRootFilesystem: false
           runAsUser: 0
           runAsGroup: 0
@@ -139,6 +138,7 @@ spec:
                 enabled: true
                 primary: true
                 args:
+                  - --dbus-stub
                   - --no-sandbox
                   - --remote-debugging-address=0.0.0.0
                   - --remote-debugging-port=9222
