@@ -145,6 +145,7 @@ spec:
                   - --remote-debugging-address=0.0.0.0
                   - --remote-debugging-port=9222
                   - --hide-scrollbars
+                  - --headless
                 imageSelector: chromeImage
                 resources:
                   excludeExtra: true
