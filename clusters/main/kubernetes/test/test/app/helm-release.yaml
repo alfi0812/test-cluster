@@ -8,7 +8,7 @@ spec:
     chart:
         spec:
             # renovate: registryUrl=https://charts.truechartsoci.org
-            chart: youtubedl-material
+            chart: app-template
             version: 14.5.3
             sourceRef:
                 kind: HelmRepository
