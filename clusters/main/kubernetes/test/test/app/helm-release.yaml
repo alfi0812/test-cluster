@@ -26,7 +26,7 @@ spec:
             retries: 3
     values:
         image:
-            repository: tccr.io/tccr/alpine
+            repository: alpine
             pullPolicy: IfNotPresent
             tag: latest
         workload:
