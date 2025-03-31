@@ -26,3 +26,6 @@ spec:
       metrics:
         main:
           enabled: false
+      configmap:
+        dashboard-volsync:
+          enabled: false
