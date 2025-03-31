@@ -29,10 +29,23 @@ spec:
             repository: tccr.io/tccr/alpine
             pullPolicy: IfNotPresent
             tag: latest
+        workload:
             main:
                 podSpec:
                     hostPID: true
                     hostNetwork: true
+                    containers:
+                        main:
+                            probes:
+                                liveness:
+                                    enabled: false
+                                readiness:
+                                    enabled: false
+                                startup:
+                                    enabled: false
+        service:
+            main:
+                enabled: false
         securityContext:
             container:
                 runAsUser: 0
