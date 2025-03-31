@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: youtubedl-material
+    name: app-template
     namespace: test
 spec:
     interval: 5m
@@ -9,7 +9,7 @@ spec:
         spec:
             # renovate: registryUrl=https://charts.truechartsoci.org
             chart: youtubedl-material
-            version: 12.11.7
+            version: 14.5.3
             sourceRef:
                 kind: HelmRepository
                 name: truecharts
@@ -25,3 +25,21 @@ spec:
         remediation:
             retries: 3
     values:
+        image:
+            repository: tccr.io/tccr/alpine
+            pullPolicy: IfNotPresent
+            tag: latest
+            main:
+                podSpec:
+                    hostPID: true
+                    hostNetwork: true
+        securityContext:
+            container:
+                runAsUser: 0
+                runAsGroup: 0
+                runAsNonRoot: false
+                allowPrivilegeEscalation: true
+                privileged: true
+                capabilities:
+                    add:
+                        - SYS_ADMIN
