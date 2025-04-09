@@ -6,6 +6,6 @@ resources:
   - kube-system
   - system
   - network
-  - test  
+  - test
   - apps
   - core

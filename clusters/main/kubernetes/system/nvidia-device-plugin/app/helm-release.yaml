@@ -44,4 +44,3 @@ spec:
                     replicas: 5
       gfd:
         enabled: true
-      

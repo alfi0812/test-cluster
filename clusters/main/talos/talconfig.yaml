@@ -67,7 +67,7 @@ controlPlane:
                     - siderolabs/iscsi-tools
     machineFiles:
     - content: |
-        [plugins."io.containerd.cri.v1.images"] 
+        [plugins."io.containerd.cri.v1.images"]
           discard_unpacked_layers = false
       permissions: 0
       path: /etc/cri/conf.d/20-customization.part
@@ -97,7 +97,7 @@ worker:
                     - siderolabs/iscsi-tools
     machineFiles:
     - content: |
-        [plugins."io.containerd.cri.v1.images"] 
+        [plugins."io.containerd.cri.v1.images"]
           discard_unpacked_layers = false
       permissions: 0
       path: /etc/cri/conf.d/20-customization.part

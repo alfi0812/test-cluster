@@ -4,6 +4,7 @@ metadata:
     name: metallb
     namespace: flux-system
 spec:
+    type: oci
     interval: 10m
     url: https://metallb.github.io/metallb
     timeout: 3m
