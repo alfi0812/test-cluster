@@ -5,7 +5,7 @@ resources:
   - flux-system
   - kube-system
   - system
-  - network
+  - networking
   - test
   - apps
   - core
