@@ -1,8 +1,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: cloudnative-pg
-    namespace: cloudnative-pg
+  name: cloudnative-pg
+  namespace: cloudnative-pg
 spec:
     interval: 5m
     chart:
