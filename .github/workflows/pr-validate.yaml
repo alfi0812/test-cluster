@@ -34,9 +34,6 @@ jobs:
         with:
           args: >-
             diagnostics
-            --all-namespaces
-            --enable-helm
-            --verbose
 
   flux-diff:
     name: Flux Diff
