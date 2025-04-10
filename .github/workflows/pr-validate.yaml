@@ -36,7 +36,7 @@ jobs:
             test
             --all-namespaces
             --enable-helm
-            --path /github/workspace/
+            --path ./
             --verbose
 
   flux-diff:
