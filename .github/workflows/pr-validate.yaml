@@ -89,6 +89,10 @@ jobs:
     needs:
       - kubeconform
       - flux-diff
+    with:
+      checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
+      chartChangesDetected: ${{ needs.pr-changes.outputs.addedOrModified }}
+      modifiedCharts: ${{ needs.pr-changes.outputs.addedOrModifiedCharts }}
 
   automerge-and-approve:
     needs:
