@@ -87,23 +87,6 @@ jobs:
           helm repo add  csi-driver-nfs https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
           helm repo update
 
-      - name: Collect changes (branch-based)
-        id: list-changed
-        # if: inputs.chartChangesDetected == 'true'
-        shell: bash
-        run: |
-          CHARTS="${{ inputs.modifiedCharts }}"
-          echo "Modified Charts: ${CHARTS}"
-
-          EXCLUDED_JSON=$(go-yq eval -o=json '.excluded-charts // []' .github/ct-lint.yaml)
-          CHARTS_JSON=$(echo "${CHARTS}" | jq --raw-input '.' | jq --compact-output --slurp '.')
-          OUTPUT_JSON=$(echo "{\"excluded\": ${EXCLUDED_JSON}, \"all\": ${CHARTS_JSON}}" | jq --compact-output '.all-.excluded')
-
-          echo CHANGED_CHARTS=${OUTPUT_JSON} >> "$GITHUB_OUTPUT"
-          if [[ $(echo ${OUTPUT_JSON} | jq --compact-output '. | length') -gt 0 ]]; then
-            echo "detected=true" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Test and Fix Pre-Commit Issues
         shell: bash
         # TODO: Only run pre-commit on changed files
