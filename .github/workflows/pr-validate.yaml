@@ -37,7 +37,6 @@ jobs:
             --all-namespaces
             --enable-helm
             --path /github/workspace/clusters/main/kubernetes
-            --path /github/workspace/repositories
             --verbose
 
   flux-diff:
@@ -48,7 +47,7 @@ jobs:
       pull-requests: write
     strategy:
       matrix:
-        paths: ["clusters/main/kubernetes/flux-system/flux/flux.yaml"]
+        paths: ["clusters/main/kubernetes/flux-system/flux"]
         resources: ["helmrelease", "kustomization"]
     steps:
       - name: Checkout
