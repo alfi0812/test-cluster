@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout [master]
-        if: inputs.chartChangesDetected == 'true'
+        # if: inputs.chartChangesDetected == 'true'
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           fetch-depth: 1
@@ -35,11 +35,11 @@ jobs:
           ref: ${{ inputs.checkoutCommit }}
 
       - name: Setting repo parent dir as safe safe.directory
-        if: inputs.chartChangesDetected == 'true'
+        # if: inputs.chartChangesDetected == 'true'
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - name: Install go-yq
-        if: inputs.chartChangesDetected == 'true'
+        # if: inputs.chartChangesDetected == 'true'
         run: |
           mkdir -p $HOME/.local/bin
           wget https://github.com/mikefarah/yq/releases/download/v4.26.1/yq_linux_amd64 -O $HOME/.local/bin/go-yq && \
@@ -47,12 +47,12 @@ jobs:
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Install pre-commit, yamale and yamllint
-        if: inputs.chartChangesDetected == 'true'
+        # if: inputs.chartChangesDetected == 'true'
         run: |
           pip3 install --no-cache-dir pre-commit yamale yamllint
 
       - name: Install Helm
-        if: inputs.chartChangesDetected == 'true'
+        # if: inputs.chartChangesDetected == 'true'
         uses: azure/setup-helm@b9e51907a09c216f16ebe8536097933489208112 # v4
         with:
           version: v3.14.0
@@ -75,7 +75,7 @@ jobs:
           cd ..
 
       - name: Prep Helm
-        if: inputs.chartChangesDetected == 'true'
+        # if: inputs.chartChangesDetected == 'true'
         run: |
           helm repo add jetstack https://charts.jetstack.io
           helm repo add vmwaretanzu https://vmware-tanzu.github.io/helm-charts
@@ -89,7 +89,7 @@ jobs:
 
       - name: Collect changes (branch-based)
         id: list-changed
-        if: inputs.chartChangesDetected == 'true'
+        # if: inputs.chartChangesDetected == 'true'
         shell: bash
         run: |
           CHARTS="${{ inputs.modifiedCharts }}"
@@ -108,7 +108,7 @@ jobs:
         shell: bash
         # TODO: Only run pre-commit on changed files
         # TODO: Commit fixes
-        if: inputs.chartChangesDetected == 'true'
+        # if: inputs.chartChangesDetected == 'true'
         run: |
           echo "Running pre-commit test-and-cleanup..."
           # Fix sh files to always be executable
@@ -117,7 +117,7 @@ jobs:
 
       - name: Fetch and Verify dependencies
         shell: bash
-        if: steps.list-changed.outputs.detected == 'true'
+        # if: steps.list-changed.outputs.detected == 'true'
         env:
           charts_path: "./"
         run: |
@@ -127,7 +127,7 @@ jobs:
       - name: Run Chart Linting
         continue-on-error: true
         id: lint
-        if: steps.list-changed.outputs.detected == 'true'
+        # if: steps.list-changed.outputs.detected == 'true'
         env:
           result_file: /tmp/lint_result.txt
         run: |
@@ -136,7 +136,7 @@ jobs:
           .github/scripts/tc-lint.sh '${{ steps.list-changed.outputs.CHANGED_CHARTS }}' "origin/${{ github.base_ref }}"
 
       - name: Create/Update comment
-        if: steps.list-changed.outputs.detected == 'true'
+        # if: steps.list-changed.outputs.detected == 'true'
         continue-on-error: true
         uses: thollander/actions-comment-pull-request@24bffb9b452ba05a4f3f77933840a6a841d1b32b # v3
         with:
@@ -146,7 +146,7 @@ jobs:
           github-token: ${{ github.token }}
 
       - name: Lint Result
-        if: steps.list-changed.outputs.detected == 'true'
+        # if: steps.list-changed.outputs.detected == 'true'
         shell: bash
         run: |
           if [ "${{ steps.lint.outcome }}" != "success" ]; then
