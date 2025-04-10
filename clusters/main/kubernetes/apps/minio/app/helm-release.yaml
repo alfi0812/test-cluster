@@ -36,8 +36,8 @@ spec:
       config:
         enabled: true
         type: nfs
-        path: ${MINIO_NFS_PATH}
-        server: ${BACKUP_TRUENAS_IP}
+        path: "${MINIO_NFS_PATH}"
+        server: "${BACKUP_TRUENAS_IP}"
     workload:
       main:
         podSpec:
