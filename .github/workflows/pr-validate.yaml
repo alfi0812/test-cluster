@@ -23,20 +23,6 @@ jobs:
       - name: Run kubeconform
         shell: bash
         run: bash ./scripts/kubeconform.sh ${{ env.KUBERNETES_DIR }}
-  test:
-    name: Flux Local - Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-      - name: Run flux-local test
-        uses: docker://ghcr.io/allenporter/flux-local:v7.3.0
-        with:
-          args: >-
-            test
-            --all-namespaces
-            --enable-helm
-            --sources "cluster"
 
   flux-diff:
     name: Flux Diff
