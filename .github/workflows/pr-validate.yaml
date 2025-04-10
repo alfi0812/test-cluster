@@ -37,7 +37,7 @@ jobs:
             --all-namespaces
             --enable-helm
             --verbose
-            --debug
+            --log-level DEBUG
 
   flux-diff:
     name: Flux Diff
