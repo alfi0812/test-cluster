@@ -35,8 +35,6 @@ jobs:
           args: >-
             test
             --all-namespaces
-            --enable-helm
-            --verbose
             --sources "cluster"
 
   flux-diff:
