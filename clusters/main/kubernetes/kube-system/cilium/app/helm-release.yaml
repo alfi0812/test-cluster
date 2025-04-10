@@ -13,7 +13,7 @@ spec:
   chart:
     spec:
       chart: cilium
-      version: 1.17.2
+      version: 1.17.3
       sourceRef:
         kind: HelmRepository
         name: home-ops-mirror
@@ -39,7 +39,7 @@ spec:
     hubble:
       enabled: false
     cluster:
-        name: ${TEST2}
+        name: ${CLUSTERNAME}
         id: 1
     ipv4NativeRoutingCIDR: ${PODNET}
     securityContext:
