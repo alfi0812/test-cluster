@@ -10,25 +10,9 @@ env:
   KUBERNETES_DIR: ./clusters/main/kubernetes
 
 jobs:
-  pr-changes:
-    name: Collect PR changes
-    runs-on: ubuntu-latest
-    outputs:
-      addedOrModified: ${{ steps.collect-changes.outputs.changesDetected }}
-      addedOrModifiedFiles: ${{ steps.collect-changes.outputs.addedOrModifiedFiles }}
-      addedOrModifiedCharts: ${{ steps.collect-changes.outputs.addedOrModifiedCharts }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-      - name: Collect changes
-        id: collect-changes
-        uses: ./.github/actions/collect-changes
-
   kubeconform:
     name: Kubeconform
     runs-on: ubuntu-latest
-    needs:
-      - pr-changes
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -43,8 +27,6 @@ jobs:
   flux-diff:
     name: Flux Diff
     runs-on: ubuntu-latest
-    needs:
-      - pr-changes
     permissions:
       contents: read
       pull-requests: write
@@ -93,16 +75,13 @@ jobs:
             ```diff
             ${{ steps.diff.outputs.diff }}
             ```
+            
   charts-test:
     uses: ./.github/workflows/charts-test.yaml
     needs:
-      - pr-changes
       - kubeconform
       - flux-diff
-    with:
-      checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
-      chartChangesDetected: ${{ needs.pr-changes.outputs.addedOrModified }}
-      modifiedCharts: ${{ needs.pr-changes.outputs.addedOrModifiedCharts }}
+
   automerge-and-approve:
     needs:
       - pr-changes
