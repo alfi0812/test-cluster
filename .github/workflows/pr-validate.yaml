@@ -33,10 +33,9 @@ jobs:
         uses: docker://ghcr.io/allenporter/flux-local:v7.3.0
         with:
           args: >-
-            test
+            diagnostics
             --all-namespaces
             --enable-helm
-            --path /github/workspace/clusters/main/kubernetes/flux-system
             --verbose
 
   flux-diff:
