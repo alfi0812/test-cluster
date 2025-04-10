@@ -33,7 +33,10 @@ jobs:
         uses: docker://ghcr.io/allenporter/flux-local:v7.3.0
         with:
           args: >-
-            diagnostics
+            test
+            --all-namespaces
+            --enable-helm
+            --verbose
 
   flux-diff:
     name: Flux Diff
