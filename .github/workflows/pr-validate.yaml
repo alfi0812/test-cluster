@@ -5,7 +5,9 @@ on:
 
 concurrency:
   group: ${{ github.head_ref }}-pr-validate
-  # cancel-in-progress: true
+  cancel-in-progress: true
+env:
+  KUBERNETES_DIR: ./clusters/main/kubernetes
 
 jobs:
   pr-changes:
@@ -18,24 +20,99 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-
       - name: Collect changes
         id: collect-changes
         uses: ./.github/actions/collect-changes
+
+  kubeconform:
+    name: Kubeconform
+    runs-on: ubuntu-latest
+    needs:
+      - pr-changes
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Setup Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+      - name: Setup Workflow Tools
+        run: brew install fluxcd/tap/flux kubeconform kustomize
+      - name: Run kubeconform
+        shell: bash
+        run: bash ./scripts/kubeconform.sh ${{ env.KUBERNETES_DIR }}
+
+  flux-diff:
+    name: Flux Diff
+    runs-on: ubuntu-latest
+    needs:
+      - pr-changes
+      - kubeconform
+    permissions:
+      contents: read
+      pull-requests: write
+    strategy:
+      matrix:
+        paths: ["clusters/main/kubernetes"]
+        resources: ["kustomization"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          path: pull
+      - name: Checkout Default Branch
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          ref: "${{ github.event.repository.default_branch }}"
+          path: default
+      - name: Diff Resources
+        uses: docker://ghcr.io/allenporter/flux-local:main@sha256:1209653e60a93599e96d5f52f462524992bffe9f05fca85612bbe3b8b8f95c14
+        with:
+          args: >-
+            diff ${{ matrix.resources }}
+            --unified 6
+            --path /github/workspace/pull/${{ matrix.paths }}
+            --path-orig /github/workspace/default/${{ matrix.paths }}
+            --strip-attrs "helm.sh/chart,checksum/config,app.kubernetes.io/version,chart"
+            --limit-bytes 10000
+            --all-namespaces
+            --sources "cluster"
+            --output-file diff.patch
+      - name: Generate Diff
+        id: diff
+        run: |
+          cat diff.patch
+          echo "diff<<EOF" >> $GITHUB_OUTPUT
+          cat diff.patch >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - if: ${{ steps.diff.outputs.diff != '' }}
+        name: Add comment
+        uses: mshick/add-pr-comment@b8f338c590a895d50bcbfa6c5859251edc8952fc # v2
+        with:
+          message-id: "${{ github.event.pull_request.number }}/${{ matrix.paths }}/${{ matrix.resources }}"
+          message-failure: Diff was not successful
+          message: |
+            ```diff
+            ${{ steps.diff.outputs.diff }}
+            ```
 
   charts-lint:
     uses: ./.github/workflows/charts-lint.yaml
     needs:
       - pr-changes
+      - kubeconform
+      - flux-diff
     with:
       checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
       chartChangesDetected: ${{ needs.pr-changes.outputs.addedOrModified }}
       modifiedFiles: ${{ needs.pr-changes.outputs.addedOrModifiedFiles }}
       modifiedCharts: ${{ needs.pr-changes.outputs.addedOrModifiedCharts }}
+
   charts-test:
     uses: ./.github/workflows/charts-test.yaml
     needs:
       - pr-changes
+      - kubeconform
+      - flux-diff
       - charts-lint
     with:
       checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
@@ -47,12 +124,16 @@ jobs:
     if: always()
     needs:
       - pr-changes
+      - kubeconform
+      - flux-diff
       - charts-lint
       - charts-test
     steps:
       - name: Check Results
         run: |
           if [[ "${{ needs.pr-changes.result }}" != "success" || \
+                "${{ needs.kubeconform.result }}" != "success" || \
+                "${{ needs.flux-diff.result }}" != "success" || \
                 "${{ needs.charts-lint.result }}" != "success" || \
                 "${{ needs.charts-test.result }}" != "success" ]]; then
             echo "One or more jobs failed!"
@@ -60,3 +141,21 @@ jobs:
           else
             echo "All jobs succeeded!"
           fi
+  automerge-and-approve:
+    needs:
+      - pr-changes
+      - kubeconform
+      - flux-diff
+      - charts-lint
+      - charts-test
+      - finished
+    name: Automerge and Approve build
+    runs-on: ubuntu-latest
+    steps:
+      - name: automerge
+        uses: pascalgn/automerge-action@7961b8b5eec56cc088c140b56d864285eabd3f67 # v0.16.4
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          UPDATE_RETRIES: 12
+          UPDATE_RETRY_SLEEP: 60000
+          MERGE_METHOD: squash
