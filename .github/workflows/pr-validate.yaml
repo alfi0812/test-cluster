@@ -45,7 +45,6 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - pr-changes
-      - kubeconform
     permissions:
       contents: read
       pull-requests: write
@@ -99,8 +98,6 @@ jobs:
     uses: ./.github/workflows/charts-lint.yaml
     needs:
       - pr-changes
-      - kubeconform
-      - flux-diff
     with:
       checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
       chartChangesDetected: ${{ needs.pr-changes.outputs.addedOrModified }}
@@ -118,29 +115,6 @@ jobs:
       checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
       chartChangesDetected: ${{ needs.pr-changes.outputs.addedOrModified }}
       modifiedCharts: ${{ needs.pr-changes.outputs.addedOrModifiedCharts }}
-  finished:
-    name: Finished PR Tests
-    runs-on: ubuntu-latest
-    if: always()
-    needs:
-      - pr-changes
-      - kubeconform
-      - flux-diff
-      - charts-lint
-      - charts-test
-    steps:
-      - name: Check Results
-        run: |
-          if [[ "${{ needs.pr-changes.result }}" != "success" || \
-                "${{ needs.kubeconform.result }}" != "success" || \
-                "${{ needs.flux-diff.result }}" != "success" || \
-                "${{ needs.charts-lint.result }}" != "success" || \
-                "${{ needs.charts-test.result }}" != "success" ]]; then
-            echo "One or more jobs failed!"
-            exit 1
-          else
-            echo "All jobs succeeded!"
-          fi
   automerge-and-approve:
     needs:
       - pr-changes
@@ -148,7 +122,6 @@ jobs:
       - flux-diff
       - charts-lint
       - charts-test
-      - finished
     name: Automerge and Approve build
     runs-on: ubuntu-latest
     steps:
