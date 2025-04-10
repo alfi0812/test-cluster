@@ -36,6 +36,7 @@ jobs:
             test
             --all-namespaces
             --enable-helm
+            --path /github/workspace/clusters/main/kubernetes/flux-system
             --verbose
 
   flux-diff:
