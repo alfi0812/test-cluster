@@ -38,6 +38,7 @@ jobs:
             --enable-helm
             --verbose
             --log-level DEBUG
+            --sources "cluster"
 
   flux-diff:
     name: Flux Diff
