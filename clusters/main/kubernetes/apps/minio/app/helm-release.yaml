@@ -36,7 +36,7 @@ spec:
       config:
         enabled: true
         type: nfs
-        path: /mnt/Share/minio
+        path: "${MINIO_NFS_PATH}"
         server: "${BACKUP_TRUENAS_IP}"
     workload:
       main:
