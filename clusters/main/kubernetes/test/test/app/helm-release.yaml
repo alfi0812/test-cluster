@@ -27,5 +27,5 @@ spec:
   values:
     plextraktsync:
       cron_enabled: true
-      task: "sync test test"
+      task: "sync"
       schedule: "* * * * *"
