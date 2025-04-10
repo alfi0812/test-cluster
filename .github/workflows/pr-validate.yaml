@@ -33,7 +33,7 @@ jobs:
     strategy:
       matrix:
         paths: ["clusters/main/kubernetes"]
-        resources: ["kustomization"]
+        resources: ["helmrelease", "kustomization"]
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -55,7 +55,7 @@ jobs:
             --strip-attrs "helm.sh/chart,checksum/config,app.kubernetes.io/version,chart"
             --limit-bytes 10000
             --all-namespaces
-            --sources "cluster"
+            --sources "flux-system"
             --output-file diff.patch
       - name: Generate Diff
         id: diff
@@ -66,11 +66,19 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
 
       - if: ${{ steps.diff.outputs.diff != '' }}
-        name: Add comment
-        uses: mshick/add-pr-comment@b8f338c590a895d50bcbfa6c5859251edc8952fc # v2
+        name: Generate Token
+        uses: actions/create-github-app-token@3ff1caaa28b64c9cc276ce0a02e2ff584f3900c5 # v2.0.2
+        id: app-token
         with:
-          message-id: "${{ github.event.pull_request.number }}/${{ matrix.paths }}/${{ matrix.resources }}"
-          message-failure: Diff was not successful
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
+
+      - if: ${{ steps.diff.outputs.diff != '' }}
+        name: Add Comment
+        uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
+        with:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          header: ${{ github.event.pull_request.number }}/kubernetes/${{ matrix.resource }}
           message: |
             ```diff
             ${{ steps.diff.outputs.diff }}
