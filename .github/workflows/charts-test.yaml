@@ -15,10 +15,7 @@ on:
 
 jobs:
   install-charts:
-    needs:
-      - generate-install-matrix
-    if: needs.generate-install-matrix.outputs.detected1 == 'true'
-    name: Install charts  Part 1
+    name: Install charts
     strategy:
       matrix: ${{ fromJson(needs.generate-install-matrix.outputs.matrix1) }}
       fail-fast: false

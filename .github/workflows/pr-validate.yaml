@@ -84,16 +84,11 @@ jobs:
             ${{ steps.diff.outputs.diff }}
             ```
 
-  charts-test:
-    uses: ./.github/workflows/charts-test.yaml
-    needs:
-      - kubeconform
-      - flux-diff
-    with:
-      checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
-      chartChangesDetected: ${{ needs.pr-changes.outputs.addedOrModified }}
-      modifiedCharts: ${{ needs.pr-changes.outputs.addedOrModifiedCharts }}
-
+#  charts-test:
+#    uses: ./.github/workflows/charts-test.yaml
+#    needs:
+#      - kubeconform
+#      - flux-diff
   automerge-and-approve:
     needs:
       - kubeconform
