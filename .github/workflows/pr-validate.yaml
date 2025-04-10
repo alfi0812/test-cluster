@@ -37,7 +37,6 @@ jobs:
             --all-namespaces
             --enable-helm
             --verbose
-            --log-level DEBUG
             --sources "cluster"
 
   flux-diff:
