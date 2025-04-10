@@ -21,12 +21,12 @@ jobs:
     name: Lint Charts and Verify Dependencies
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout [master]
+      - name: Checkout [main]
         # if: inputs.chartChangesDetected == 'true'
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           fetch-depth: 1
-          ref: master
+          ref: main
 
       - name: Checkout [commit]
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
