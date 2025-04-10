@@ -35,7 +35,7 @@ spec:
     keepHistory: false
   values:
     # autoDirectNodeRoutes: true
-    # routingMode: native
+    routingMode: native
     hubble:
       enabled: false
     cluster:
