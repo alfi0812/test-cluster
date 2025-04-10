@@ -75,7 +75,7 @@ jobs:
             ```diff
             ${{ steps.diff.outputs.diff }}
             ```
-            
+
   charts-test:
     uses: ./.github/workflows/charts-test.yaml
     needs:
@@ -84,7 +84,6 @@ jobs:
 
   automerge-and-approve:
     needs:
-      - pr-changes
       - kubeconform
       - flux-diff
       - charts-test
