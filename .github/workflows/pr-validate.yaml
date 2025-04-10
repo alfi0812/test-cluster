@@ -32,7 +32,7 @@ jobs:
       pull-requests: write
     strategy:
       matrix:
-        resources: ["helmrelease", "kustomization"]
+        resources: ["kustomization"]
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -83,11 +83,6 @@ jobs:
             ${{ steps.diff.outputs.diff }}
             ```
 
-#  charts-test:
-#    uses: ./.github/workflows/charts-test.yaml
-#    needs:
-#      - kubeconform
-#      - flux-diff
   automerge-and-approve:
     needs:
       - kubeconform
