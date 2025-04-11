@@ -102,7 +102,7 @@ jobs:
     needs:
       - kubeconform
       - flux-diff
-      #- charts-test
+      - test
     name: Automerge and Approve build
     runs-on: ubuntu-latest
     steps:
