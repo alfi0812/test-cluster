@@ -41,3 +41,5 @@ spec:
                     replicas: 5
       gfd:
         enabled: true
+      nodeSelector:
+        feature.node.kubernetes.io/pci-10de.present: "true"
