@@ -36,7 +36,7 @@ spec:
       config:
         enabled: true
         type: nfs
-        path: ${MINIO_PATH | default "https://test.com"}
+        path: ${MINIO_PATH:=https://test.com}
         server: ${BACKUP_TRUENAS_IP}
     workload:
       main:
