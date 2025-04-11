@@ -37,7 +37,7 @@ jobs:
             test
             --all-namespaces
             --enable-helm
-            --sources "cluster"
+            --verbose
 
   flux-diff:
     name: Flux Diff
@@ -66,7 +66,6 @@ jobs:
             --unified 6
             --path /github/workspace/pull/
             --path-orig /github/workspace/default/
-            --strip-attrs "helm.sh/chart,checksum/config,app.kubernetes.io/version,chart"
             --limit-bytes 10000
             --all-namespaces
             --sources "cluster"
