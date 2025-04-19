@@ -25,7 +25,9 @@ spec:
       retries: 3
   values:
     global:
-      stopAll: true
+      annotations:
+        reloader.stakater.com/auto: true
+      stopAll: false
     ingress:
       main:
         enabled: true
@@ -35,3 +37,7 @@ spec:
             enabled: false
         hosts:
           - host: libre.${DOMAIN_0}
+    service:
+      main:
+        type: LoadBalancer
+        loadBalancerIP: ${DASHBOARD_IP}
