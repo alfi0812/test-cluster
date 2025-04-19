@@ -26,7 +26,7 @@ spec:
   values:
     global:
       annotations:
-        reloader.stakater.com/auto: true
+        reloader.stakater.com/auto: "true"
       stopAll: false
     ingress:
       main:
