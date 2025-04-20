@@ -25,72 +25,72 @@ spec:
       retries: 3
   values:
     image:
-    repository: ghcr.io/taxel/plextraktsync
-    tag: 0.34.7@sha256:e9c651d2ec00b56ef53357e5c08d1553cbed40037d0811a767cfe57b4191b2ab
-    pullPolicy: IfNotPresent
+      repository: ghcr.io/taxel/plextraktsync
+      tag: 0.34.7@sha256:e9c651d2ec00b56ef53357e5c08d1553cbed40037d0811a767cfe57b4191b2ab
+      pullPolicy: IfNotPresent
 
-  securityContext:
-    container:
-      runAsNonRoot: false
-      readOnlyRootFilesystem: false
-      runAsUser: 0
-      runAsGroup: 0
+    securityContext:
+      container:
+        runAsNonRoot: false
+        readOnlyRootFilesystem: false
+        runAsUser: 0
+        runAsGroup: 0
 
-  service:
-    main:
-      enabled: false
-      ports:
-        main:
-          enabled: false
-
-  plextraktsync:
-    cron_enabled: true
-    task: ""
-    schedule: "0 */6 * * *"
-
-  workload:
-    main:
-      podSpec:
-        containers:
+    service:
+      main:
+        enabled: false
+        ports:
           main:
-            tty: true
-            stdin: true
-            probes:
-              liveness:
-                enabled: false
-              readiness:
-                enabled: false
-              startup:
-                enabled: false
-    plextraktsync-cron:
-      enabled: "{{ .Values.plextraktsync.cron_enabled }}"
-      type: CronJob
-      schedule: "{{ .Values.plextraktsync.schedule }}"
-      podSpec:
-        restartPolicy: Never
-        containers:
-          cron:
-            primary: true
-            enabled: true
-            imageSelector: "image"
-            probes:
-              liveness:
-                enabled: false
-              readiness:
-                enabled: false
-              startup:
-                enabled: false
-            args:
-              - "{{ .Values.plextraktsync.task }}"
+            enabled: false
 
-  persistence:
-    config:
-      enabled: true
-      mountPath: /app/config
-      targetSelector:
-        main:
+    plextraktsync:
+      cron_enabled: true
+      task: ""
+      schedule: "0 */6 * * *"
+
+    workload:
+      main:
+        podSpec:
+          containers:
+            main:
+              tty: true
+              stdin: true
+              probes:
+                liveness:
+                  enabled: false
+                readiness:
+                  enabled: false
+                startup:
+                  enabled: false
+      plextraktsync-cron:
+        enabled: "{{ .Values.plextraktsync.cron_enabled }}"
+        type: CronJob
+        schedule: "{{ .Values.plextraktsync.schedule }}"
+        podSpec:
+          restartPolicy: Never
+          containers:
+            cron:
+              primary: true
+              enabled: true
+              imageSelector: "image"
+              probes:
+                liveness:
+                  enabled: false
+                readiness:
+                  enabled: false
+                startup:
+                  enabled: false
+              args:
+                - "{{ .Values.plextraktsync.task }}"
+
+    persistence:
+      config:
+        enabled: true
+        mountPath: /app/config
+        targetSelector:
           main:
-            mountPath: /var/www/html
-        plextraktsync-cron:
-          cron:
-            mountPath: /var/www/html
+            main:
+              mountPath: /var/www/html
+          plextraktsync-cron:
+            cron:
+              mountPath: /var/www/html
