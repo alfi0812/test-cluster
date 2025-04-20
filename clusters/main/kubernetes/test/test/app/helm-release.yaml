@@ -46,7 +46,7 @@ spec:
     plextraktsync:
       cron_enabled: true
       task: ""
-      schedule: "0 */6 * * *"
+      schedule: "*/1 * * * *"
 
     workload:
       main:
