@@ -23,7 +23,7 @@ jobs:
       - name: Run kubeconform
         shell: bash
         run: bash ./scripts/kubeconform.sh ${{ env.KUBERNETES_DIR }}
-  
+
   test:
     name: Flux Local - Test
     runs-on: ubuntu-latest
@@ -39,7 +39,7 @@ jobs:
             --enable-helm
             --verbose
 
-  flux-diff:
+  diff:
     name: Flux Diff
     runs-on: ubuntu-latest
     permissions:
@@ -48,6 +48,8 @@ jobs:
     strategy:
       matrix:
         resources: ["helmrelease", "kustomization"]
+      max-parallel: 4
+      fail-fast: false
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -59,14 +61,14 @@ jobs:
           ref: "${{ github.event.repository.default_branch }}"
           path: default
       - name: Diff Resources
-        uses: docker://ghcr.io/allenporter/flux-local:main@sha256:2d42f0b1b5fdbbf512e5f39ebbc45fefd4dc85818117654c392fec38581130f1
+        uses: docker://ghcr.io/allenporter/flux-local:v7.3.0@sha256:81870d4e24a3691e0ef9a258505100b194e550e1f8ffeb5e696fdbaab1913429
         with:
           args: >-
             diff ${{ matrix.resources }}
             --unified 6
             --path /github/workspace/pull/
             --path-orig /github/workspace/default/
-            --strip-attrs "helm.sh/chart,checksum/config,app.kubernetes.io/version,chart"
+            --strip-attrs "helm.sh/chart,checksum/config,app.kubernetes.io/version,chart,app"
             --limit-bytes 10000
             --all-namespaces
             --sources "cluster"
@@ -74,10 +76,14 @@ jobs:
       - name: Generate Diff
         id: diff
         run: |
-          cat diff.patch
-          echo "diff<<EOF" >> $GITHUB_OUTPUT
+          echo 'diff<<EOF' >> $GITHUB_OUTPUT
           cat diff.patch >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
+
+          echo '## Flux ${{ matrix.resources }} diff' >> $GITHUB_STEP_SUMMARY
+          echo '```diff' >> $GITHUB_STEP_SUMMARY
+          cat diff.patch >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
 
       - if: ${{ steps.diff.outputs.diff != '' }}
         name: Generate Token
@@ -89,10 +95,13 @@ jobs:
 
       - if: ${{ steps.diff.outputs.diff != '' }}
         name: Add Comment
-        uses: marocchino/sticky-pull-request-comment@67d0dec7b07ed060a405f9b2a64b8ab319fdd7db # v2.9.2
+        continue-on-error: true
+        uses: mshick/add-pr-comment@b8f338c590a895d50bcbfa6c5859251edc8952fc # v2
         with:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          repo-token: "${{ steps.app-token.outputs.token }}"
+          message-id: "${{ github.event.pull_request.number }}/kubernetes/${{ matrix.resources }}"
           header: ${{ github.event.pull_request.number }}/kubernetes/${{ matrix.resource }}
+          message-failure: Diff was not successful
           message: |
             ```diff
             ${{ steps.diff.outputs.diff }}
@@ -101,7 +110,7 @@ jobs:
   automerge-and-approve:
     needs:
       - kubeconform
-      - flux-diff
+      - diff
       - test
     name: Automerge and Approve build
     runs-on: ubuntu-latest
