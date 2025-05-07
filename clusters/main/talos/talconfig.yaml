@@ -61,7 +61,6 @@ controlPlane:
         customization:
             extraKernelArgs:
                 - net.ifnames=0
-                - -selinux
             systemExtensions:
                 officialExtensions:
                     - siderolabs/util-linux-tools
@@ -94,7 +93,6 @@ worker:
         customization:
             extraKernelArgs:
                 - net.ifnames=0
-                - -selinux
             systemExtensions:
                 officialExtensions:
                     - siderolabs/util-linux-tools
