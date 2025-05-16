@@ -83,6 +83,7 @@ spec:
       main:
         enabled: true
         primary: true
+        expandObjectName: false
     service:
       main:
         enabled: false
