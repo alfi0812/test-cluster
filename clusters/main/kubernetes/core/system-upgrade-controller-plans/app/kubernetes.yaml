@@ -7,7 +7,7 @@ metadata:
   namespace: system-upgrade
 spec:
   version: ${KUBERNETES_VERSION}
-  serviceAccountName: system-upgrade-controller-app-template
+  serviceAccountName: system-upgrade
   secrets:
   - name: talos
     path: /var/run/secrets/talos.dev
