@@ -48,16 +48,19 @@ spec:
                 SYSTEM_UPGRADE_CONTROLLER_NAMESPACE: system-upgrade
     persistence:
       etc-ssl:
+        enabled: true
         type: hostPath
         hostPath: /etc/ssl
         hostPathType: DirectoryOrCreate
         readOnly: true
       etc-pki:
+        enabled: true
         type: hostPath
         hostPath: /etc/pki
         hostPathType: DirectoryOrCreate
         readOnly: true
       etc-ca-certificates:
+        enabled: true
         type: hostPath
         hostPath: /etc/ca-certificates
         hostPathType: DirectoryOrCreate
