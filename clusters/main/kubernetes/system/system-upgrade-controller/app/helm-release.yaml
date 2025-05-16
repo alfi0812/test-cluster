@@ -72,4 +72,5 @@ spec:
       system-upgrade:
         enabled: true
         primary: true
-        
+    service:
+      enabled: false
