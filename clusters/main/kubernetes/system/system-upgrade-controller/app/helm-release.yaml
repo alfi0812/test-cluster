@@ -44,10 +44,7 @@ spec:
               SYSTEM_UPGRADE_JOB_TTL_SECONDS_AFTER_FINISH: 900
               SYSTEM_UPGRADE_PLAN_POLLING_INTERVAL: 15m
               SYSTEM_UPGRADE_CONTROLLER_NAME: system-update-controller
-              SYSTEM_UPGRADE_CONTROLLER_NAMESPACE:
-                valueFrom:
-                  fieldRef:
-                    fieldPath: metadata.namespace
+              SYSTEM_UPGRADE_CONTROLLER_NAMESPACE: system-upgrade
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
@@ -79,6 +76,7 @@ spec:
     serviceAccount:
       system-upgrade:
         enabled: true
+        namespace: system-upgrade
     persistence:
       tmp:
         type: emptyDir
