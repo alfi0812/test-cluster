@@ -51,18 +51,21 @@ spec:
         enabled: true
         type: hostPath
         hostPath: /etc/ssl
+        mountPath: /etc/ssl
         hostPathType: DirectoryOrCreate
         readOnly: true
       etc-pki:
         enabled: true
         type: hostPath
         hostPath: /etc/pki
+        mountPath: /etc/pki
         hostPathType: DirectoryOrCreate
         readOnly: true
       etc-ca-certificates:
         enabled: true
         type: hostPath
         hostPath: /etc/ca-certificates
+        mountPath: /etc/ca-certificates
         hostPathType: DirectoryOrCreate
         readOnly: true
     serviceAccount:
