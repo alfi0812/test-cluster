@@ -33,6 +33,13 @@ spec:
         podSpec:
           containers:
             main:
+              probes:
+                liveness:
+                  enabled: false
+                readiness:
+                  enabled: false
+                startup:
+                  enabled: false
               env:
                 SYSTEM_UPGRADE_CONTROLLER_DEBUG: false
                 SYSTEM_UPGRADE_CONTROLLER_THREADS: 2
