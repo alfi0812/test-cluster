@@ -1,7 +1,6 @@
   values:
     controllers:
       system-upgrade-controller:
-        strategy: RollingUpdate
         serviceAccount:
           identifier: system-upgrade
       tolerations:

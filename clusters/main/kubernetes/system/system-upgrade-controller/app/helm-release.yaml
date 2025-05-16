@@ -83,6 +83,7 @@ spec:
       system-upgrade:
         enabled: true
         primary: true
+        namespace: system-upgrade
     service:
       main:
         enabled: false
