@@ -74,6 +74,15 @@ spec:
         primary: true
         serviceAccounts:
           - system-upgrade
+        rules:
+          - apiGroups:
+              - "rbac.authorization.k8s.io"
+            resources:
+              - roles
+            verbs:
+              - get
+              - list
+              - watch
         subjects:
           - apiGroup: rbac.authorization.k8s.io
             kind: ClusterRole
