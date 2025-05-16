@@ -53,6 +53,11 @@ spec:
                 SYSTEM_UPGRADE_PLAN_POLLING_INTERVAL: 15m
                 SYSTEM_UPGRADE_CONTROLLER_NAME: system-update-controller
                 SYSTEM_UPGRADE_CONTROLLER_NAMESPACE: system-upgrade
+    securityContext:
+      containers:
+        runAsuser: 65534
+        runAsGroup: 65534
+        runAsNonRoot: true
     persistence:
       etc-ssl:
         enabled: true
