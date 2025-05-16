@@ -76,7 +76,6 @@ spec:
     serviceAccount:
       system-upgrade:
         enabled: true
-        namespace: system-upgrade
     persistence:
       tmp:
         type: emptyDir
