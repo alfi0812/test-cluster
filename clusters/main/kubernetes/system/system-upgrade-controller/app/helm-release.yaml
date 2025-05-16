@@ -80,11 +80,9 @@ spec:
         hostPathType: DirectoryOrCreate
         readOnly: true
     serviceAccount:
-      system-upgrade:
+      main:
         enabled: true
         primary: true
-        namespace: system-upgrade
-        expandObjectName: false
     service:
       main:
         enabled: false
