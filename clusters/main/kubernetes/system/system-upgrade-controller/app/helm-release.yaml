@@ -66,25 +66,4 @@ spec:
       system-upgrade:
         enabled: true
         primary: true
-      talos:
-        enabled: true
-    rbac:
-      main:
-        enabled: true
-        primary: true
-        serviceAccounts:
-          - system-upgrade
-        rules:
-          - apiGroups:
-              - "rbac.authorization.k8s.io"
-            resources:
-              - roles
-            verbs:
-              - get
-              - list
-              - watch
-        subjects:
-          - apiGroup: rbac.authorization.k8s.io
-            kind: ClusterRole
-            name: cluster-admin
         
