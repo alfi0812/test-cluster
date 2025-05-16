@@ -73,4 +73,5 @@ spec:
         enabled: true
         primary: true
     service:
-      enabled: false
+      main:
+        enabled: false
