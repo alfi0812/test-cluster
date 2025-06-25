@@ -48,11 +48,7 @@ spec:
                 CR_CONF_Database.User: "{{ .Values.cnpg.main.user }}"
                 CR_CONF_Database.Name: "{{ .Values.cnpg.main.database }}"
                 CR_CONF_Database.Port: 5432
-                CR_CONF_Redis.Server: 
-                  secretKeyRef:
-                    expandObjectName: false
-                    name: '{{ printf "%s-%s" .Release.Name "rediscreds" }}'
-                    key: plainhost
+                CR_CONF_Redis.Server: '{{ .Values.redis.creds.plain | trimAll "\"" }}'
     persistence:
       config:
         enabled: true
