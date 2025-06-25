@@ -55,7 +55,7 @@ spec:
     persistence:
       config:
         enabled: true
-        mountPath: "/cloudreve"
+        mountPath: "/cloudreve/data"
     securityContext:
       container:
         readOnlyRootFilesystem: false
