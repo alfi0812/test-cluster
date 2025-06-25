@@ -7,7 +7,7 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: librespeed
+      chart: app-template
       version: 1.0.0
       sourceRef:
         kind: HelmRepository
