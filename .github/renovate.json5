@@ -1,19 +1,22 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended",
-    "github>truecharts/public//.github/renovate/main.json5",
-    "github>alfi0812/talos-cluster//.github/custom.json5"
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'config:recommended',
+    'github>truecharts/public//.github/renovate/main.json5',
+    'github>alfi0812/talos-cluster//.github/custom.json5',
   ],
-  "regexManagers": [
+  customManagers: [
     {
-      "fileMatch": ["^Dockerfile$"],
-      "matchStrings": [
-        "ARG CLUSTERTOOL_VERSION=(?<currentValue>[0-9.]+)"
+      customType: 'regex',
+      managerFilePatterns: [
+        '/^Dockerfile$/',
       ],
-      "datasourceTemplate": "github-releases",
-      "packageNameTemplate": "truecharts/public",
-      "versioningTemplate": "semver"
-    }
-  ]
+      matchStrings: [
+        'ARG CLUSTERTOOL_VERSION=(?<currentValue>[0-9.]+)',
+      ],
+      datasourceTemplate: 'github-releases',
+      packageNameTemplate: 'truecharts/public',
+      versioningTemplate: 'semver',
+    },
+  ],
 }
