@@ -48,7 +48,7 @@ spec:
                 CR_CONF_Database.User: "{{ .Values.cnpg.main.user }}"
                 CR_CONF_Database.Name: "{{ .Values.cnpg.main.database }}"
                 CR_CONF_Database.Port: 5432
-                CR_CONF_Redis.Server: '{{ .Values.redis.creds.plain | trimAll "\"" }}'
+                CR_CONF_Redis.Server: '{{ .Values.redis.creds.url | trimAll "\"" }}'
     persistence:
       config:
         enabled: true
