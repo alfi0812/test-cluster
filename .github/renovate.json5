@@ -13,8 +13,7 @@
       ],
       "datasourceTemplate": "github-releases",
       "packageNameTemplate": "truecharts/public",
-      "versioningTemplate": "semver",
-      "extractVersionTemplate": "{{ version | replace('clustertool-', '') }}"
+      "versioningTemplate": "semver"
     }
   ]
 }
