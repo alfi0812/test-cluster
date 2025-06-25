@@ -9,7 +9,7 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "/^Dockerfile$/"
+        "/Dockerfile$/"
       ],
       "matchStrings": [
         "ARG CLUSTERTOOL_VERSION=(?<currentValue>[0-9.]+)"
