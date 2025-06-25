@@ -3,12 +3,12 @@
   "name": "ClusterTool Cluster",
   "build": { "dockerfile": "Dockerfile" },
   "postCreateCommand": {
-    "setup": "bash ${containerWorkspaceFolder}/.devcontainer/postCreateCommand.sh"
-  },
-  "postStartCommand": {
-    "git": "git config --global --add safe.directory ${containerWorkspaceFolder}"
-  },
+      "setup": "bash ${containerWorkspaceFolder}/.devcontainer/postCreateCommand.sh"
+    },
+    "postStartCommand": {
+      "git": "git config --global --add safe.directory ${containerWorkspaceFolder}"
+    },
   "postAttachCommand": "fish",
   "updateRemoteUserUID": false,
   "runArgs": ["--privileged"]
-}
+      }
