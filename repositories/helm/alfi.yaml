@@ -5,4 +5,4 @@ metadata:
     namespace: flux-system
 spec:
     interval: 5m0s
-    url: https://alfi0812.github.io/helm-charts/
+    url: https://alfi0812.github.io/helm-charts
