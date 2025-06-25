@@ -62,4 +62,13 @@ spec:
           main:
             port: 5212
             targetPort: 5212
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: internal
+        integrations:
+          traefik:
+            enabled: false
+        hosts:
+          - host: test.${DOMAIN_0}
 
