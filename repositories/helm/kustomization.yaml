@@ -14,3 +14,4 @@ resources:
   - truecharts.yaml
 # more goes here!
   - stakater.yaml
+  - alfi.secret.yaml
