@@ -12,9 +12,13 @@ fisher install nickeb96/puffer-fish
 fisher install PatrickF1/fzf.fish
 "
 
-kubectl krew install pv-mounter
+curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/krew-linux_amd64.tar.gz" \
+    && tar zxvf "krew-linux_amd64.tar.gz" \
+    && ./"krew-linux_amd64" install krew \
+    && rm ./krew-linux_amd64.tar.gz
 
-# Create/update virtual environment
-if ! grep -q "venv /workspaces/" .venv/pyvenv.cfg; then
-    rm -rf .venv
-fi
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+kubectl krew install pv-mounter
+kubectl krew install cnpg
+kubectl krew install df-pv
