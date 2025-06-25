@@ -9,10 +9,10 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "/^(Dockerfile|dockerfile)(\\..*)?$/i" 
+        "/^Dockerfile$/"
       ],
       "matchStrings": [
-        "ARG CLUSTERTOOL_VERSION=(?<currentValue>[0-9.]+)\\b"
+        "ARG CLUSTERTOOL_VERSION=(?<currentValue>[0-9.]+)"
       ],
       "datasourceTemplate": "github-releases",
       "packageNameTemplate": "truecharts/public",
