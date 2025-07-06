@@ -53,25 +53,17 @@ spec:
         enabled: true
         ingressClassName: external
         integrations:
-          traefik:
-            enabled: false
           certManager:
             enabled: true
             certificateIssuer: domain-0-le-prod
         hosts:
           - host: minio.${DOMAIN_0}
-            paths:
-              - path: /
-                pathType: Prefix
       api:
         enabled: true
         ingressClassName: external
         integrations:
-          traefik:
-            enabled: false
           certManager:
             enabled: true
             certificateIssuer: domain-0-le-prod
         hosts:
           - host: api.${DOMAIN_0}
-            paths:

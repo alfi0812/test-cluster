@@ -30,8 +30,5 @@ spec:
       main:
         enabled: true
         ingressClassName: internal
-        integrations:
-          traefik:
-            enabled: false
         hosts:
           - host: libre.${DOMAIN_0}
