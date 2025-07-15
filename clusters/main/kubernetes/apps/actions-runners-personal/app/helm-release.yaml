@@ -33,7 +33,7 @@ spec:
     minRunners: 2
     maxRunners: 4
     githubConfigSecret: runner-secret-personal
-    githubConfigUrl: https://github.com/alfi0812
+    githubConfigUrl: https://github.com/alfi0812/talos-cluster
     controllerServiceAccount:
       name: actions-runner-controller
       namespace: gha-personal
