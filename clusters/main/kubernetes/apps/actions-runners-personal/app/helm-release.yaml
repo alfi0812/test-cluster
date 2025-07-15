@@ -36,7 +36,7 @@ spec:
     githubConfigUrl: https://github.com/alfi0812
     controllerServiceAccount:
       name: actions-runner-controller
-      namespace: gha
+      namespace: gha-personal
     containerMode:
       type: kubernetes
       kubernetesModeWorkVolumeClaim:
