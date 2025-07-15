@@ -4,5 +4,3 @@ resources:
   - kubernetes-dashboard/ks.yaml
   - minio/ks.yaml
   - docker-registry/ks.yaml
-  - actions-runner-controller/ks.yaml
-  - actions-runners/ks.yaml
