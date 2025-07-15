@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - helm-release.yaml
   - config.secret.yaml
+  - config.secret copy.yaml
