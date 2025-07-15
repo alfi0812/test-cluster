@@ -30,8 +30,8 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    minRunners: 3
-    maxRunners: 6
+    minRunners: 2
+    maxRunners: 4
     githubConfigSecret: runner-secret-personal
     githubConfigUrl: https://github.com/alfi0812
     controllerServiceAccount:
