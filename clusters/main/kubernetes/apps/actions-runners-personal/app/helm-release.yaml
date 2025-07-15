@@ -50,7 +50,7 @@ spec:
       spec:
         containers:
           - name: runner
-            image: ubuntu:latest
+            image: tccr.io/tccr/charts-ci:latest
             command:
               - /home/runner/run.sh
             env:
