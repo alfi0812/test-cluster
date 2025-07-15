@@ -7,3 +7,4 @@ resources:
   - actions-runner-controller/ks.yaml
   - actions-runners/ks.yaml
   - actions-runner-controller-personal/ks.yaml
+  - actions-runners-personal/ks.yaml
