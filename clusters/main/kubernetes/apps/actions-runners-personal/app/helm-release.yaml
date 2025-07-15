@@ -51,6 +51,8 @@ spec:
         containers:
           - name: runner
             image: ubuntu:latest
+            command:
+              - /home/runner/run.sh
             env:
               - name: ACTIONS_RUNNER_REQUIRE_JOB_CONTAINER
                 value: "false"
