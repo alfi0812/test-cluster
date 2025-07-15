@@ -50,7 +50,7 @@ spec:
       spec:
         containers:
           - name: runner
-            image: ubuntu-latest
+            image: ubuntu:latest
             env:
               - name: ACTIONS_RUNNER_REQUIRE_JOB_CONTAINER
                 value: "false"
