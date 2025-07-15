@@ -16,3 +16,4 @@ resources:
   - stakater.yaml
   - alfi.yaml
   - twuni.yaml
+  - actions-runner-controller.yaml
